@@ -2,12 +2,7 @@ class Solution {
     
     public int search(int[] nums, int target) {
         int low = 0;
-        int high = nums.length-1;
-
-        if(nums.length == 1) {
-            return (nums[0] == target) ? 0 : -1;
-        }
-        
+        int high = nums.length-1;        
         // smallest element idx = pivot index (where rotation happened)
         int pivotIdx = findPivot(nums, low, high);
         System.out.println(pivotIdx);
