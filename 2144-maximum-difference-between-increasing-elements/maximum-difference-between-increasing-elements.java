@@ -15,6 +15,7 @@ class Solution {
         */
 
         // Using Stack
+        /*
         LinkedList<Integer> stack = new LinkedList<>();
         int ans = -1;
         stack.addFirst(arr[0]);
@@ -23,6 +24,19 @@ class Solution {
                 stack.addFirst(arr[i]);
             } else{
                 ans = Math.max(ans, arr[i]-stack.getFirst());
+            }
+        }
+        return ans;
+        */
+
+        // Without stack
+        int stackTop = arr[0];
+        int ans = -1;
+        for(int i=1;i<arr.length;i++) {
+            if(arr[i] <= stackTop) {
+                stackTop = arr[i];
+            } else {
+                ans = Math.max(ans, arr[i]-stackTop);
             }
         }
         return ans;
