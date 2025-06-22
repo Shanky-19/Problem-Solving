@@ -22,10 +22,12 @@ class Solution {
             // here i is our first idx of subsequence
             int lastIdxToMakeSubseqOfSizeM = i+m-1; 
             if(nums[i] > 0 && lastIdxToMakeSubseqOfSizeM < n) {
-                maxi = Math.max(maxi,1L * nums[i] * maxFromRight[lastIdxToMakeSubseqOfSizeM]);
+                maxi = Math.max(maxi,
+                1L * nums[i] * maxFromRight[lastIdxToMakeSubseqOfSizeM]);
             } else {
                 if(lastIdxToMakeSubseqOfSizeM < n) {
-                    maxi = Math.max(maxi, 1L* nums[i] * minFromRight[lastIdxToMakeSubseqOfSizeM]);
+                    maxi = Math.max(maxi, 
+                    1L* nums[i] * minFromRight[lastIdxToMakeSubseqOfSizeM]);
                 }
             }
         }
