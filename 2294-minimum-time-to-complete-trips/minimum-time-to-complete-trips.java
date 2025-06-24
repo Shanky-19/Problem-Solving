@@ -22,6 +22,10 @@ class Solution {
         long trips = 0;
         for(int val : time) {
             trips += t/val;
+            // Optimization
+            if(trips >= totalTrips){
+                return trips;
+            }
         }
         return trips;
     }
