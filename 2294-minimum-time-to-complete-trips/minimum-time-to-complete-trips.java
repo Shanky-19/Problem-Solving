@@ -22,9 +22,6 @@ class Solution {
         long trips = 0;
         for(int val : time) {
             trips += t/val;
-            if(trips >= totalTrips){
-                return trips;
-            }
         }
         return trips;
     }
