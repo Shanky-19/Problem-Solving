@@ -1,61 +1,43 @@
-//Approach (Binary Search on Answer)
-//T.C : O(log(maxP-minP) * n * log(m)
-//S.C : O(1)
 class Solution {
     public long kthSmallestProduct(int[] nums1, int[] nums2, long k) {
-        long left = -1_000_000_0000L; // -1e10
-        long right = 1_000_000_0000L; // 1e10
-        long result = 0;
-
-        while (left <= right) {
-            long midProduct = left + (right - left) / 2;
-            long count = countLessEqual(nums1, nums2, midProduct);
-
-            if (count >= k) {
-                result = midProduct;
-                right = midProduct - 1;
+        long left = -10000000000L;
+        long right = 10000000000L;
+        
+        while (left < right) {
+            long mid = left + (right - left) / 2;
+            if (countProducts(nums1, nums2, mid) < k) {
+                left = mid + 1;
             } else {
-                left = midProduct + 1;
+                right = mid;
             }
         }
-
-        return result;
+        
+        return left;
     }
-
-    private long countLessEqual(int[] nums1, int[] nums2, long midProduct) {
+    
+    private long countProducts(int[] nums1, int[] nums2, long target) {
         long count = 0;
-        int n = nums2.length;
-
-        for (int a : nums1) {
-            if (a >= 0) {
-                int l = 0, r = n - 1, pos = -1;
-                while (l <= r) {
-                    int m = l + (r - l) / 2;
-                    long product = 1L * a * nums2[m];
-                    if (product <= midProduct) {
-                        pos = m;
-                        l = m + 1;
-                    } else {
-                        r = m - 1;
-                    }
-                }
-                count += (pos + 1);
-            } else {
-                int l = 0, r = n - 1, pos = n;
-                while (l <= r) {
-                    int m = l + (r - l) / 2;
-                    long product = 1L * a * nums2[m];
-                    if (product <= midProduct) {
-                        pos = m;
-                        r = m - 1;
-                    } else {
-                        l = m + 1;
-                    }
-                }
-                count += (n - pos);
+        for (int num1 : nums1) {
+            if (num1 == 0) {
+                if (target >= 0) count += nums2.length;
+                continue;
             }
+            
+            int low = 0, high = nums2.length;
+            while (low < high) {
+                int mid = low + (high - low) / 2;
+                long product = (long) num1 * nums2[mid];
+                if (product <= target) {
+                    if (num1 > 0) low = mid + 1;
+                    else high = mid;
+                } else {
+                    if (num1 > 0) high = mid;
+                    else low = mid + 1;
+                }
+            }
+            
+            count += (num1 > 0) ? low : nums2.length - low;
         }
-
         return count;
     }
 }
