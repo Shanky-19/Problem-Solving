@@ -1,14 +1,20 @@
 class FindSumPairs {
     int[] nums1;
     int[] nums2;
+    Map<Integer, Integer> nums1ValueVsNumberOfIdx;
     Map<Integer, Integer> nums2ValueVsNumberOfIdx;
     public FindSumPairs(int[] nums1, int[] nums2) {
         this.nums1 = nums1;
         this.nums2 = nums2;
+        this.nums1ValueVsNumberOfIdx = new HashMap<>();
         this.nums2ValueVsNumberOfIdx = new HashMap<>();
+        for(int idx=0;idx<nums1.length;idx++) {
+            nums1ValueVsNumberOfIdx.put(nums1[idx], nums1ValueVsNumberOfIdx.getOrDefault(nums1[idx], 0)+1);
+        }
         for(int idx=0;idx<nums2.length;idx++) {
             nums2ValueVsNumberOfIdx.put(nums2[idx], nums2ValueVsNumberOfIdx.getOrDefault(nums2[idx], 0)+1);
         }
+        
     }
     
     public void add(int index, int val) {
@@ -23,12 +29,12 @@ class FindSumPairs {
     
     public int count(int tot) {
         int ans = 0;
-        for(int i=0;i<nums1.length;i++) {
-            int remainingValue = tot - nums1[i];
+        for(int key : nums1ValueVsNumberOfIdx.keySet()) {
+            int remainingValue = tot - key;
             if(nums2ValueVsNumberOfIdx.containsKey(remainingValue)) {
-                ans += nums2ValueVsNumberOfIdx.get(remainingValue);
+                ans += nums2ValueVsNumberOfIdx.get(remainingValue) * nums1ValueVsNumberOfIdx.get(key);
             }
-        }
+        } 
         return ans;
     }
 }
