@@ -14,12 +14,10 @@ class FindSumPairs {
     public void add(int index, int val) {
         int currentValue = nums2[index];
         nums2[index] += val;
-        if(nums2ValueVsNumberOfIdx.containsKey(currentValue)) {
-            nums2ValueVsNumberOfIdx.put(currentValue, nums2ValueVsNumberOfIdx.get(currentValue) - 1);
-            if(nums2ValueVsNumberOfIdx.get(currentValue) <= 0) {
-                nums2ValueVsNumberOfIdx.remove(currentValue);
-            }
-        } 
+        nums2ValueVsNumberOfIdx.put(currentValue, nums2ValueVsNumberOfIdx.get(currentValue) - 1);
+        if(nums2ValueVsNumberOfIdx.get(currentValue) <= 0) {
+            nums2ValueVsNumberOfIdx.remove(currentValue);
+        }
         nums2ValueVsNumberOfIdx.put(nums2[index], nums2ValueVsNumberOfIdx.getOrDefault(nums2[index], 0)+1);
     }
     
