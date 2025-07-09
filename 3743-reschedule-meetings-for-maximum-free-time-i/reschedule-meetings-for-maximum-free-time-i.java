@@ -15,7 +15,7 @@ class Solution {
             freeTimes.add(eventTime - endTime[n-1]);
         }
         
-        System.out.println(freeTimes);
+        // System.out.println(freeTimes);
         // window size = k+1
         int i = 0;
         int j = 0;
