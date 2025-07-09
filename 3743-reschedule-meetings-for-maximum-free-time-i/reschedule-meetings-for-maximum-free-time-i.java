@@ -26,13 +26,10 @@ class Solution {
             sum += freeTimes.get(j);
             if(windowSize > k+1) {
                 sum -= freeTimes.get(i);
-                ans = Math.max(ans, sum);
                 i++;
-                j++;
-            } else {
-                ans = Math.max(ans, sum);
-                j++;
             }
+            ans = Math.max(ans, sum);
+            j++;
         } 
         return ans;
     }
