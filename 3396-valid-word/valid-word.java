@@ -4,7 +4,7 @@ class Solution {
         if(word.length() < 3) {
             return false;
         }
-        
+
         int vowels = 0;
         int consonants = 0;
         for(char ch : word.toCharArray()) {
@@ -16,6 +16,7 @@ class Solution {
                 return false;
             }
         }
+        
         if(vowels > 0 && consonants > 0) {
             return true;
         }
