@@ -5,18 +5,18 @@ class Solution {
         int n = nums.length;
         int maxSum = 0;
         int tempSum = 0;
-        Map<Integer, Integer> fmap = new HashMap<>();
+        Set<Integer> fmap = new HashSet<>();
         while(j < n) {
             int val = nums[j];
             tempSum += val;
-            if(fmap.containsKey(val)) {
-                while(i<j && fmap.containsKey(val)) {
+            if(fmap.contains(val)) {
+                while(i<j && fmap.contains(val)) {
                     fmap.remove(nums[i]);
                     tempSum -= nums[i];
                     i++;
                 }
             }
-            fmap.put(val, 1);
+            fmap.add(val);
             j++;
             maxSum = Math.max(maxSum, tempSum);
         }
