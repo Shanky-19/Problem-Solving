@@ -65,7 +65,6 @@ class Solution {
                 minScore = Math.min(minScore, maxVal - minVal);
             }
         }
-
         return minScore;
     }
 }
