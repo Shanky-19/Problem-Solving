@@ -13,7 +13,6 @@ class Solution {
             }
             return max;
         }
-
         int ans = 0;
         for(int val : set) {
             ans += val;
