@@ -6,7 +6,6 @@ class Solution {
                 set.add(val);
             }
         }
-
         int max = Integer.MIN_VALUE;
         if(set.size() == 0) {
             for(int val : nums) {
