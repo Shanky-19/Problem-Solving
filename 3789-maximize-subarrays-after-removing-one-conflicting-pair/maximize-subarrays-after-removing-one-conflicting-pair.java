@@ -10,11 +10,9 @@ class Solution {
         for (int[] pair : conflictingPairs) {
             right[Math.max(pair[0], pair[1])].add(Math.min(pair[0], pair[1]));
         }
-
         long ans = 0;
         long[] left = {0, 0}; // left[0] is top1, left[1] is top2
         long[] bonus = new long[n + 1];
-
         for (int r = 1; r <= n; r++) {
             for (int l_val : right[r]) {
                 // Manually update top two values
