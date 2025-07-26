@@ -23,9 +23,7 @@ class Solution {
                     left[1] = l_val;
                 }
             }
-
             ans += r - left[0];
-            
             if (left[0] > 0) {
                 bonus[(int)left[0]] += left[0] - left[1];
             }
