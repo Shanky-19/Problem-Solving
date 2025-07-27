@@ -6,7 +6,6 @@ class Solution {
             if (nums[i - 1] == nums[i]) {
                 continue;
             }
-
             if (nums[i - 1] < nums[i]) {
                 count += type == 2? 1 : 0;
                 type = 1; // hill
