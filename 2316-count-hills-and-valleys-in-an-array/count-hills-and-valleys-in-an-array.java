@@ -8,7 +8,7 @@ class Solution {
             }
             if (nums[i - 1] < nums[i]) {
                 count += type == 2? 1 : 0;
-                type = 1; // hill
+                type = 1;
             } else if (nums[i - 1] > nums[i]) {
                 count += type == 1? 1 : 0;
                 type = 2; // valley
