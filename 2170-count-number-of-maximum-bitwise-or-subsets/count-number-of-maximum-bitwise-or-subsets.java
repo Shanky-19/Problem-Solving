@@ -4,7 +4,6 @@ class Solution {
         for(int val : nums) {
             maxOr |= val;
         }
-        
         // now find subsets which have maxOr
         int count = subsetCount(nums, 0, 0, maxOr);
         return count;
