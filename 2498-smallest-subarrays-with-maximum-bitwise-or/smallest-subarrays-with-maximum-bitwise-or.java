@@ -39,7 +39,6 @@ class Solution
         for (int i = n - 1; i >= 0; i--) 
         {
             int farthest = i;  // Default: subarray ends at i
-
             // Step 4: Update latest seen positions for bits set in nums[i]
             for (int b = 0; b < 32; b++) 
             {
@@ -47,18 +46,15 @@ class Solution
                 {
                     latest[b] = i;
                 }
-
                 // Step 5: For each bit, if seen, update farthest position needed
                 if (latest[b] != -1) 
                 {
                     farthest = Math.max(farthest, latest[b]);
                 }
             }
-
             // Step 6: Store the length of smallest subarray starting at i
             result[i] = farthest - i + 1;
         }
-
         // Step 7: Return the result array
         return result;
     }
