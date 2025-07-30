@@ -1,10 +1,10 @@
 class Solution {
     public int longestSubarray(int[] nums) {
-        
         int maxAnd = nums[0];
         for(int val : nums) {
             maxAnd = Math.max(maxAnd, val);
         }
+
         int i = 0;
         int maxSize = 0;
         while(i < nums.length) {
@@ -20,6 +20,7 @@ class Solution {
             }
             maxSize= Math.max(maxSize, size);
         }
+        
         return maxSize;
     }
 
