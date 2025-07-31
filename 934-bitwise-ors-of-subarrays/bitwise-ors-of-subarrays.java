@@ -24,10 +24,8 @@ class Solution {
                 curr.add(x | arr[i]);
                 result.add(x | arr[i]);
             }
-
             curr.add(arr[i]);
             result.add(arr[i]);
-
             prev = curr;
             curr = new HashSet<>();
         }
