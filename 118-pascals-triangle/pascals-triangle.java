@@ -25,6 +25,5 @@ class Solution {
             prev = ri;
         }
         return pt;
-
     }
 }
