@@ -45,8 +45,9 @@ class Solution {
         }
 
         int maxFruits = 0;
-        // case-1 : left side d distance chalo
         for(int d=0; d<=k/2; d++) {
+
+            // case-1 : left side d distance chalo
             int i = startPos - d;
             int j = startPos + k - 2*d;
             int left = lowerBound(positions, i);
@@ -56,20 +57,18 @@ class Solution {
                 int result = prefixSum.get(right) - (left > 0 ? prefixSum.get(left - 1) : 0);
                 maxFruits = Math.max(maxFruits, result);                
             }
-            
-        }
 
-        // case-2 : right side d distance chalo
-        for(int d=0; d<=k/2; d++) {
-            int i = startPos - (k-2*d);
-            int j = startPos + d;
-            int left = lowerBound(positions, i);
-            int right = upperBound(positions, j)-1;
+            // case-2 : right side d distance chalo
+            i = startPos - (k-2*d);
+            j = startPos + d;
+            left = lowerBound(positions, i);
+            right = upperBound(positions, j)-1;
             
             if (left <= right) {
                 int result = prefixSum.get(right) - (left > 0 ? prefixSum.get(left - 1) : 0);
                 maxFruits = Math.max(maxFruits, result);                
             }
+            
         }
         return maxFruits;
     }
