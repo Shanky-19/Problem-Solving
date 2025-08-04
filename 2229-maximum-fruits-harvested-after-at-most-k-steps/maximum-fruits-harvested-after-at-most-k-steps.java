@@ -54,7 +54,8 @@ class Solution {
             int right = upperBound(positions, j)-1;
             
             if (left <= right) {
-                int result = prefixSum.get(right) - (left > 0 ? prefixSum.get(left - 1) : 0);
+                int result = prefixSum.get(right) - 
+                            (left > 0 ? prefixSum.get(left - 1) : 0);
                 maxFruits = Math.max(maxFruits, result);                
             }
 
@@ -65,7 +66,8 @@ class Solution {
             right = upperBound(positions, j)-1;
             
             if (left <= right) {
-                int result = prefixSum.get(right) - (left > 0 ? prefixSum.get(left - 1) : 0);
+                int result = prefixSum.get(right) - 
+                            (left > 0 ? prefixSum.get(left - 1) : 0);
                 maxFruits = Math.max(maxFruits, result);                
             }
             
