@@ -8,14 +8,12 @@ class Solution {
             val *= 2;
         }
         
-        // System.out.println(list);
         Map<Integer, Integer> map1 = new HashMap<>();
         while(n > 0) {
             int lastDigit = n%10;
             n = n/10;
             map1.put(lastDigit, map1.getOrDefault(lastDigit, 0) + 1);
         }
-        // System.out.println(map1);
         for(long value : list) {
             Map<Integer, Integer> map2 = new HashMap<>();
             while(value > 0) {
@@ -23,7 +21,6 @@ class Solution {
                 value = value/10;
                 map2.put(lastDigit, map2.getOrDefault(lastDigit, 0) + 1);
             }
-            // System.out.println(map2);
             if(map1.equals(map2)) {
                 return true;
             }
