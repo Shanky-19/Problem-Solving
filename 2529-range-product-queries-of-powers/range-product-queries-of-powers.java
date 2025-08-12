@@ -1,26 +1,24 @@
 class Solution {
     public int[] productQueries(int n, int[][] queries) {
-        final int MOD = 1000000007;
         List<Integer> powers = new ArrayList<>();
-        while (n > 0) {
-            int lowBit = n & -n;
-            powers.add(lowBit);
-            n ^= lowBit;
-        }
-        int size = powers.size();
-        int[][] table = new int[size][size];
-        for (int row = 0; row < size; row++) {
-            table[row][row] = powers.get(row);
-            for (int col = row + 1; col < size; col++) {
-                table[row][col] = (int)((long)table[row][col - 1] * powers.get(col) % MOD);
+        int M = 1000000007;
+        for(int i = 0;i<32;i++) {
+            // System.out.println(n & (1 << i));
+            if((n & (1 << i)) != 0) { // check if ith bit is enabled or disabled
+                powers.add((int)Math.pow(2, i));
             }
         }
-        int[] result = new int[queries.length];
-        for (int i = 0; i < queries.length; i++) {
-            int p = queries[i][0];
-            int q = queries[i][1];
-            result[i] = table[p][q];
+        int[] ans = new int[queries.length];
+        for(int i=0;i<queries.length;i++) {
+            int[] query = queries[i];
+            int left = query[0];
+            int right = query[1];
+            long product = 1L;
+            for(int j=left;j<=right;j++) {
+                product = 1L * (product * powers.get(j))%M;
+            }
+            ans[i] = (int) product;
         }
-        return result;
+        return ans;
     }
 }
