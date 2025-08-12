@@ -18,21 +18,18 @@ class Solution {
     private int helper(int[] potions, long success, int spell) {
         int low = 0;
         int high = potions.length-1;
-        boolean foundAtleastOne = false;
+        int ans = potions.length;
         while(low <= high) {
             int mid = low + (high-low)/2;
 
             long product = 1L * spell * potions[mid];
             if(product >= success) {
                 high = mid-1;
-                foundAtleastOne = true;
+                ans = mid;
             }else {
                 low = mid+1;
             }
         }
-        if(!foundAtleastOne) {
-            return potions.length;
-        }
-        return low;
+        return ans;
     }
 }
