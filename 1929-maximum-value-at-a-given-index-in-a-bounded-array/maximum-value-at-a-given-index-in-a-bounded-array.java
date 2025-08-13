@@ -24,36 +24,6 @@ class Solution {
         int nums_idx = mid;
         long sum_left_of_idx = 0L;
         long sum_right_of_idx = 0L;
-        // TLE
-/*
-        int nums_idx_1 = nums_idx - 1;
-        int idx_1 = idx - 1;
-        while(idx_1 >= 0) {
-            // System.out.println("hi");
-            if(nums_idx_1 > 0) {
-                sum_left_of_idx += nums_idx_1;
-                nums_idx_1--;
-            }else {
-                sum_left_of_idx += 1;
-            }
-            idx_1--;
-        }
-
-        int nums_idx_plus_1 = nums_idx - 1;
-        int idx_plus_1 = idx + 1;
-        while(idx_plus_1 < n) {
-            // System.out.println("hi2");
-            if(nums_idx_plus_1 > 0) {
-                sum_right_of_idx += nums_idx_plus_1;
-                nums_idx_plus_1--;
-            }else {
-                sum_right_of_idx += 1;
-            }
-            idx_plus_1++;
-        }
-        // System.out.println("hi3");
-        // System.out.println(sum_left_of_idx + " " + nums_idx + " " + sum_right_of_idx);
-*/
 
         long noOfIdxToLeft = idx;
         if(noOfIdxToLeft == 0) {
