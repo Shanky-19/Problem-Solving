@@ -32,10 +32,14 @@ class Solution {
             long left = mid-1;
             if(noOfIdxToLeft > left) {
                 long diff = noOfIdxToLeft - left;
-                sum_left_of_idx = (1L * (left) * (left + 1))/2 + diff;
+                sum_left_of_idx = 
+                    (1L * (left) * (left + 1))/2 
+                    + diff;
             } else {
                 long diff = left - noOfIdxToLeft;
-                sum_left_of_idx = (1L * (left) * (left + 1))/2 - (1L * (diff) * (diff + 1))/2;
+                sum_left_of_idx = 
+                    (1L * (left) * (left + 1))/2 
+                    - (1L * (diff) * (diff + 1))/2;
             }
         }
 
@@ -46,10 +50,14 @@ class Solution {
             long right = mid-1;
             if(noOfIdxToRight > right) {
                 long diff = noOfIdxToRight - right;
-                sum_right_of_idx = (1L * (right) * (right + 1))/2 + diff;
+                sum_right_of_idx = 
+                    (1L * (right) * (right + 1))/2 
+                    + diff;
             } else {
                 long diff = right - noOfIdxToRight;
-                sum_right_of_idx = (1L * (right) * (right + 1))/2 - (1L * (diff) * (diff + 1))/2;
+                sum_right_of_idx = 
+                    (1L * (right) * (right + 1))/2 
+                    - (1L * (diff) * (diff + 1))/2;
             }
         }
         
