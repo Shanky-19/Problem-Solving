@@ -53,7 +53,6 @@ class Solution {
             }
         }
         
-        // System.out.println(sum_left_of_idx + " " + nums_idx + " " + sum_right_of_idx);
         if(sum_left_of_idx + nums_idx + sum_right_of_idx <= maxSum) {
             return true;
         }
