@@ -15,19 +15,18 @@ class Solution {
         // imp point is the final array element might or might not
         // be present in current array.
 
-
         long ans = Long.MAX_VALUE;
 
-        int left = Integer.MAX_VALUE;
-        int right = Integer.MIN_VALUE;
+        int low = nums[0];
+        int high = nums[0];
 
         for(int val: nums){
-            left = Math.min(left,val);
-            right = Math.max(right,val);
+            low = Math.min(low,val);
+            high = Math.max(high,val);
         }
 
-        while(left <= right){
-            int mid = left + (right-left)/2;
+        while(low <= high){
+            int mid = low + (high-low)/2;
 
             long cost1 = findCost(mid,cost,nums);
             long cost2 = findCost(mid+1,cost,nums);
@@ -35,13 +34,12 @@ class Solution {
             ans = Math.min(cost2,cost1);
 
             if(cost2 > cost1){
-                right = mid-1;
+                high = mid-1;
             }else{
-                left = mid + 1;
+                low = mid + 1;
             }
 
         }
-
         return ans;
     }
 }
