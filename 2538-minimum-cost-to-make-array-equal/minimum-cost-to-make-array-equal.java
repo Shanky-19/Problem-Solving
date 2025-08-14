@@ -1,6 +1,4 @@
 class Solution {
-
-
     public long findCost(int num,int[] cost,int[] nums){
         long totalCost = 0;
         for(int i=0;i<nums.length;i++){
