@@ -7,8 +7,11 @@ class Solution {
             char c2 = num.charAt(i+1);
             char c3 = num.charAt(i+2);
             if(c1 == c2 && c2 == c3) {
-                String s = "" + c1 + c2 + c3;
-                max = Math.max(max, Integer.parseInt(s));
+                StringBuilder s = new StringBuilder();
+                s.append(c1);
+                s.append(c2);
+                s.append(c3);
+                max = Math.max(max, Integer.parseInt(s.toString()));
             }
         }
         if(max == -1) {
