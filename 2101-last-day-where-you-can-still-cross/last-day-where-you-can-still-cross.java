@@ -1,14 +1,5 @@
 class Solution {
     public int[][] dir = {{-1,0}, {0, 1}, {1, 0}, {0, -1}};
-    class Pair {
-        int r;
-        int c;
-
-        public Pair (int r, int c) {
-            this.r = r;
-            this.c = c;
-        }
-    }
     public int latestDayToCross(int row, int col, int[][] cells) {
         // make zero based matrix
         for(int[] cell  : cells) {
@@ -72,36 +63,6 @@ class Solution {
         }
         return false;
 
-    }
-
-    private boolean bfs (int[][] grid, int row, int col) {
-        LinkedList<Pair> queue = new LinkedList<>();
-        queue.addLast(new Pair(row, col));
-        int rows = grid.length;
-        int cols = grid[0].length;
-        // boolean[][] visited = new boolean[rows][cols];
-        while(queue.size() > 0) {
-            // r m* w a*
-            Pair p = queue.removeFirst();
-            int r = p.r;
-            int c = p.c;
-
-            grid[r][c] = 1;
-
-            if(r == rows-1) {
-                return true;
-            }
-            for(int[] d : dir) {
-                int newRow = r + d[0];
-                int newCol = c + d[1];
-                if(isValid(newRow, newCol, rows, cols) 
-                    && grid[newRow][newCol] == 0 ) {
-                    // && !visited[newRow][newCol]) {
-                    queue.addLast(new Pair(newRow, newCol));
-                }
-            }
-        }
-        return false;
     }
 
     private boolean isValid(int r, int c, int rows, int cols) {
