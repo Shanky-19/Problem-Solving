@@ -46,7 +46,6 @@ class Solution {
                 }
             }
             bloomed = low;
-            System.out.println(bloomed);
 
             low = 0;
             high = m-1;
