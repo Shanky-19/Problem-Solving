@@ -1,24 +1,5 @@
 class Solution {
     public int[] fullBloomFlowers(int[][] flowers, int[] people) {
-        // brute force
-        /*
-        int n = people.length;
-        int[] ans = new int[n];
-        for(int i=0;i<n;i++) {
-            int pep = people[i];
-            int count = 0;
-            for(int[] flower : flowers) {
-                if(pep >= flower[0] && pep <= flower[1]) {
-                    count++;
-                }
-            } 
-            ans[i] = count;
-        }
-        return ans;
-        */
-
-
-        // optimized
         int n = people.length;
         int m = flowers.length;
         int[] ans = new int[n];
