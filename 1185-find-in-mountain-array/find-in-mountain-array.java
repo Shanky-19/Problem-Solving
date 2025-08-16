@@ -35,7 +35,6 @@ class Solution {
     public int findInMountainArray(int target, MountainArray mountainArr) {
         int n = mountainArr.length();
         int peakIdx = findPeakIndex(mountainArr, n);
-        System.out.println(peakIdx);
 
         int ans = -1;
         ans = binarySearchLeft(0, peakIdx, mountainArr, target);
