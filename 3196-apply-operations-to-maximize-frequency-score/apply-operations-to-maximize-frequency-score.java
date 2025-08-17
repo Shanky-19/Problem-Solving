@@ -103,7 +103,6 @@ class Solution {
 
     private boolean isPossible(int[] nums, int windowSize,
                                  long k, long[] prefixSum) {
-        // System.out.println(windowSize);
         int i = 0;
         int j = windowSize-1;
         while (j < nums.length) {
@@ -115,15 +114,15 @@ class Solution {
 
             long leftOperations = 0;
             if(mid-1 >= 0) {
-                leftOperations = Math.abs((target * (mid-i)) - 
-                    (prefixSum[mid-1] - ((i==0) ? 0 : prefixSum[i-1])));
+                long leftOldSum = prefixSum[mid-1] - 
+                                ((i==0) ? 0 : prefixSum[i-1]);
+                long leftNewSum = target * (mid-i);
+                leftOperations = Math.abs(leftNewSum - leftOldSum);
             }
-            
 
-            long rightOperations = Math.abs((target * (j-mid)) 
-                    - (prefixSum[j] - prefixSum[mid]));
-
-            // System.out.println(leftOperations + " " + rightOperations);
+            long rightOldSum = prefixSum[j] - prefixSum[mid];
+            long righttNewSum = target * (j-mid);
+            long rightOperations = Math.abs(righttNewSum - rightOldSum);
 
             if(leftOperations + rightOperations <= k) {
                 return true;
