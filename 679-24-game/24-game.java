@@ -1,14 +1,11 @@
-
 //Approach (Khandani Backtracking template and all possible options)
 //T.C : O(1), size of input is constant and of size 4
 //S.C : O(1), size of input is constant and of size 4
 class Solution {
-
     // 0.01 or 0.001 will also work
     private static final double EPSILON = 1e-6; 
     // Tolerance for floating-point comparison. 
     // To avoid floating point precission errors 
-
     public boolean judgePoint24(int[] cards) {
         List<Double> nums = new ArrayList<>();
         for (int card : cards) {
@@ -16,23 +13,19 @@ class Solution {
         }
         return solve(nums);
     } 
-
     private boolean solve(List<Double> cards) {
         if (cards.size() == 1) {
             return Math.abs(cards.get(0) - 24) <= EPSILON;
         }
-
         for (int i = 0; i < cards.size(); i++) {
             for (int j = 0; j < cards.size(); j++) {
                 if (i == j) continue;
-
                 List<Double> temp = new ArrayList<>();
                 for (int k = 0; k < cards.size(); k++) {
                     if (k != i && k != j) {
                         temp.add(cards.get(k));
                     }
                 }
-
                 double a = cards.get(i);
                 double b = cards.get(j);
                 List<Double> possibleVals = new ArrayList<>();
@@ -49,7 +42,6 @@ class Solution {
                 //b/a is not required, our i and j for loop will take care of it
                     possibleVals.add(b / a); 
                 }
-
                 for (double val : possibleVals) {
                     temp.add(val); // Do
                     if (solve(temp)) return true; // Explore
@@ -57,7 +49,6 @@ class Solution {
                 }
             }
         }
-
         return false;
     }
 }
