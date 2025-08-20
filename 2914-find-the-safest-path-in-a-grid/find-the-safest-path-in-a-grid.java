@@ -104,16 +104,8 @@ class Solution {
         if(grid.get(0).get(0) == 1 || grid.get(n-1).get(n-1) == 1) {
             return 0;
         }
-
+        
         int[][] safenessFactor = calculateSafenessFactorOfEachCell(grid, n);
-
-        // for(int i=0;i<n;i++) {
-        //     for(int j=0;j<n;j++) {
-        //         System.out.print(safenessFactor[i][j] + " ");
-        //     }
-        //     System.out.println();
-        // }
-
         int low = 0;
         int high = Integer.MAX_VALUE;
         int ans = 0;
