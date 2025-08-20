@@ -22,7 +22,6 @@ class Solution {
                 safeness[i][j] = -1;
                 if (grid.get(i).get(j) == 1) {
                     queue.addLast(new Pair(i,j));
-                    // System.out.println(i + " " + j);
                 }
             }
         }
