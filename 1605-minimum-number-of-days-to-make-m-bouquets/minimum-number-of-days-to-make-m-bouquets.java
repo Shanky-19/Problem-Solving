@@ -38,9 +38,7 @@ class Solution {
                 adjacentBloomed = 0;
             }
         }
-
         // System.out.println(day + " " + bouquets);
-
         if(bouquets < m){
             return false;
         }
