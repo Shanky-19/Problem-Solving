@@ -85,6 +85,7 @@ class Solution {
 
 
         // Approach 2 : Binary Search
+        /*
         int m = worker.length;
         int n = profit.length;
         int ans = 0;
@@ -114,6 +115,43 @@ class Solution {
                 int maxProfitTillIdx = sortedByDiff.get(idx).p;
                 ans += maxProfitTillIdx;
             }
+        }
+        return ans;
+        */
+
+
+        // Approach 3 : Most optimized
+        int m = worker.length;
+        int n = profit.length;
+        int ans = 0;
+        List<Pair2> sortedByDiff = new ArrayList<>();
+        for(int i=0;i<n;i++) {
+            int diff = difficulty[i];
+            int prof = profit[i];
+            sortedByDiff.add(new Pair2(diff, prof));
+        }
+        Collections.sort(sortedByDiff);
+        Arrays.sort(worker);
+        int maxProfit = 0;
+        int i = 0; // for worker
+        int j = 0; // for diff 
+        while (i < m && j < n) {
+            int ability = worker[i];
+            while(j < n && ability >= sortedByDiff.get(j).d) {
+                Pair2 pair = sortedByDiff.get(j);
+                int diff = pair.d;
+                int prof = pair.p;
+
+                maxProfit = Math.max(maxProfit, prof);
+                j++;
+            }
+            ans += maxProfit;
+            i++;
+        }
+
+        while(i < m) {
+            ans += maxProfit;
+            i++;
         }
         return ans;
         
