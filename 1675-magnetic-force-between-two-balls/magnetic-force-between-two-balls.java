@@ -27,8 +27,11 @@ class Solution {
                 m--;
                 lastPos = currPos;
             }
+            if(m == 0) {
+                return true;
+            }
         }
-        return (m > 0) ? false : true;
+        return false;
     }
 
 }
