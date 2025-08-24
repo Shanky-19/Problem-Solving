@@ -22,6 +22,8 @@ class Solution {
                     flip = 1;
                 }
             }
+            // we don't have to flip we have to delet
+            // hence -> (j-i-1)
             ans = Math.max(ans, j-i-1);
 
         }
