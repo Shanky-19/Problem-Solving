@@ -1,12 +1,11 @@
 class Solution {
     public int minimizedMaximum(int n, int[] quantities) {
         int m = quantities.length;
-        Arrays.sort(quantities);
         int low = 1;
-        int high = quantities[m-1];
+        int high = 100000;
         int ans = -1;
         while (low <= high) {
-            // stores
+            // maxProducts
             int mid = low + (high - low)/2;
             if(isPossible(quantities, n, mid)) {
                 ans = mid;
