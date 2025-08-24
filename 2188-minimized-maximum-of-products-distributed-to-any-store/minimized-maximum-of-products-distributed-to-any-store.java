@@ -6,6 +6,7 @@ class Solution {
         int high = quantities[m-1];
         int ans = -1;
         while (low <= high) {
+            // stores
             int mid = low + (high - low)/2;
             if(isPossible(quantities, n, mid)) {
                 ans = mid;
