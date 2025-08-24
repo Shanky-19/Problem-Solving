@@ -1,13 +1,11 @@
 class Solution {
     public long countFairPairs(int[] nums, int lower, int upper) {
-        // bruce force
         int n = nums.length;
         long ans = 0;
         Arrays.sort(nums);
         for(int i=0;i<n;i++) {
             int x = pairsSumLessThanLower(nums, i, lower);
             int y = pairsSumeLessThanEqualToUpper(nums, i, upper);
-            // System.out.println("nums[i] " + nums[i] + " x : " + x + " y : " + y);
             ans += (y-x);
         }
         return ans;
