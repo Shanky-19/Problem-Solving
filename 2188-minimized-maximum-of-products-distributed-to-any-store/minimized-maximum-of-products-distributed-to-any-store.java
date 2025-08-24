@@ -2,7 +2,10 @@ class Solution {
     public int minimizedMaximum(int n, int[] quantities) {
         int m = quantities.length;
         int low = 1;
-        int high = 100000;
+        int high = 1;
+        for(int val : quantities) {
+            high = Math.max(val, high);
+        }
         int ans = -1;
         while (low <= high) {
             // maxProducts
