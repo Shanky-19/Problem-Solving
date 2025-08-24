@@ -25,7 +25,11 @@ class Solution {
     private long countOperations(int[] nums,int maxPenalty) {
         long operations = 0;
         for(int val : nums) {
-            operations += (long)Math.ceil((val*1.0)/maxPenalty) - 1;
+            int div = val/maxPenalty;
+            if(val%maxPenalty != 0) {
+                div++;
+            }
+            operations += div - 1;
         }
         return operations;
     }
