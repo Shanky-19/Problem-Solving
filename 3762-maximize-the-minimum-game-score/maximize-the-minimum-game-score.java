@@ -9,8 +9,8 @@ class Solution {
 
         for (int i = 0; i < n && moves <= m; i++) {
             int gamePoint = points[i];
-            long games = (target + gamePoint - 1) / gamePoint; // ceil(target / gamePoint)
-
+            // ceil(target / gamePoint)
+            long games = (target + gamePoint - 1) / gamePoint; 
             if (advanceGamesToNext >= games) {
                 advanceGamesToNext = 0;
                 normalMove += 1;
