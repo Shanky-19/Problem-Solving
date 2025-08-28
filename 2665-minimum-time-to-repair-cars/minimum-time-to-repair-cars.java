@@ -22,6 +22,7 @@ class Solution {
 
     private boolean isPossible (long time, int[] ranks, int cars) {
         long totalCarsRepaired = 0;
+        
         for(int rank : ranks) {
             // cars this mechanic can 
             // repair in time 
