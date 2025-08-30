@@ -3,8 +3,13 @@
 //S.C : O(1)
 class Solution {
     public long kthSmallestProduct(int[] nums1, int[] nums2, long k) {
-        long left = -1_000_000_0000L; // -1e10
-        long right = 1_000_000_0000L; // 1e10
+        long extreme1 = 1L * nums1[0] * nums2[0];
+        long extreme2 = 1L * nums1[0] * nums2[nums2.length-1];
+        long extreme3 = 1L * nums1[nums1.length-1] * nums2[0];
+        long extreme4 = 1L * nums1[nums1.length-1] * nums2[nums2.length-1];
+
+        long left = Math.min(extreme1, Math.min(extreme2, Math.min(extreme3, extreme4))); // -1e10
+        long right = Math.max(extreme1, Math.max(extreme2, Math.max(extreme3, extreme4)));; // 1e10
         long ans = 0;
         while (left <= right) {
             long midProduct = left + (right - left) / 2;
