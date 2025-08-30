@@ -1,5 +1,4 @@
 class Solution {
-
     public boolean isSafe(char[][] board,int row,int col,char val){
         int n = board.length;
         int m = board[0].length;
@@ -9,14 +8,12 @@ class Solution {
                 return false;
             }
         }
-
         // col safety
         for(int i=0;i<n;i++){
             if(i != row && board[i][col] == val){
                 return false;
             }
         }
-
         // 3X3 matrix safety
         int cornerx = row/3 * 3;
         int cornery = col/3 * 3;
