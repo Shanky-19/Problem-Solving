@@ -5,13 +5,14 @@ class Solution {
     public long kthSmallestProduct(int[] nums1, int[] nums2, long k) {
         long left = -1_000_000_0000L; // -1e10
         long right = 1_000_000_0000L; // 1e10
-
-        while (left < right) {
+        long ans = 0;
+        while (left <= right) {
             long midProduct = left + (right - left) / 2;
             long count = countLessEqual(nums1, nums2, midProduct);
 
             if (count >= k) {
-                right = midProduct;
+                ans = count;
+                right = midProduct - 1;
             } else {
                 left = midProduct + 1;
             }
