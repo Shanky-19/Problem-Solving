@@ -14,8 +14,6 @@ class Solution {
             }
             temp = t;
         }
-
-        System.out.println(temp);
         return temp.get(0);
     }
 }
