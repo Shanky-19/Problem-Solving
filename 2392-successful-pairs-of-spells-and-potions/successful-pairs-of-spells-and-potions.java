@@ -2,17 +2,14 @@ class Solution {
     public int[] successfulPairs(int[] spells, int[] potions, long success) {
         Arrays.sort(potions);
         int n = potions.length;
-        List<Integer> ans = new ArrayList<>();
-        for(int spell : spells) {
+        int[] ans = new int[spells.length];
+        for(int i=0;i<spells.length;i++) {
+            int spell = spells[i];
             int idx = helper(potions, success, spell);
             int successfull = n - idx;
-            ans.add(successfull);
+            ans[i] = successfull;
         }
-        int[] res = new int[ans.size()];
-        for(int i=0;i<ans.size();i++) {
-            res[i] = ans.get(i);
-        }
-        return res;
+        return ans;
     }
 
     private int helper(int[] potions, long success, int spell) {
@@ -22,7 +19,7 @@ class Solution {
         while(low <= high) {
             int mid = low + (high-low)/2;
 
-            long product = 1L * spell * potions[mid];
+            long product = (long) spell * potions[mid];
             if(product >= success) {
                 high = mid-1;
                 ans = mid;
