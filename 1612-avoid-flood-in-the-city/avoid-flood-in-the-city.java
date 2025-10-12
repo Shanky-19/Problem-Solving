@@ -1,10 +1,15 @@
 class Solution {
     public int[] avoidFlood(int[] rains) {
         int n = rains.length;
-        Map<Integer, Integer> map = new HashMap<>(); // lake -> last day it was filled
-        TreeSet<Integer> dryDays = new TreeSet<>(); // indices of dry days (rains[i] == 0)
+        // lake -> last day it was filled
+        Map<Integer, Integer> map = new HashMap<>();
+
+        // indices of dry days (rains[i] == 0)
+        TreeSet<Integer> dryDays = new TreeSet<>();
         int[] ans = new int[n];
-        Arrays.fill(ans, 1); // default all dry days to dry lake 1
+
+        // default all dry days to dry lake 1
+        Arrays.fill(ans, 1);
 
         for (int i = 0; i < n; i++) {
             int lake = rains[i];
@@ -21,7 +26,8 @@ class Solution {
                     Integer dryDay = dryDays.higher(map.get(lake));   
 
                     if (dryDay == null) {
-                        // no dry day available to empty this lake before raining again → flood
+                        // no dry day available to empty 
+                        // this lake before raining again → flood
                         return new int[0];
                     }
 
