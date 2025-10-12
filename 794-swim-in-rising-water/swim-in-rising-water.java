@@ -1,47 +1,64 @@
 class Solution {
-    int n;
-    int[][] directions = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
-    boolean[][] visited;
-
-    private boolean reachable(int[][] grid, int i, int j, int mid) {
-        if (i < 0 || i >= n || j < 0 || j >= n || visited[i][j] || grid[i][j] > mid)
-            return false;
-
-        visited[i][j] = true;
-
-        if (i == n - 1 && j == n - 1)
-            return true;
-
-        for (int[] dir : directions) {
-            int new_i = i + dir[0];
-            int new_j = j + dir[1];
-            if (reachable(grid, new_i, new_j, mid))
-                return true;
-        }
-
-        return false;
-    }
-
     public int swimInWater(int[][] grid) {
-        n = grid.length;
+        int n = grid.length;
+        int low = 0;
+        int high = n*n;
+        int ans = n*n;
+        while (low <= high) {
+            int mid = low + (high-low)/2;
+            
+            boolean isPossible = helper(grid, mid);
 
-        int l = grid[0][0], r = n * n - 1;
-        int result = 0;
-
-        while (l <= r) {
-            int mid = l + (r - l) / 2;
-            visited = new boolean[n][n];
-
-            if (reachable(grid, 0, 0, mid)) {
-                result = mid;
-                r = mid - 1;
+            if(isPossible) {
+                ans = mid;
+                high = mid-1;
             } else {
-                l = mid + 1;
+                low = mid + 1;
             }
         }
+        return ans;
+    }
 
-        return result;
+    private boolean helper(int[][] grid, int time) {
+        int x = 0;
+        int y = 0;
+        int n = grid.length;
+        boolean[][] visited = new boolean[n][n];
+
+        boolean isPossible = false;
+        if(grid[x][y] <= time) {
+            isPossible = dfs(x, y, n, time, grid, visited);
+        }
+        return isPossible;
+    }
+
+    int[][] dirs = {{-1,0}, {0,1}, {1,0}, {0,-1}};
+
+    boolean isValid(int x, int y, int n) {
+        return x>=0 && x<n && y>=0 && y<n;
+    }
+
+    private boolean dfs(int x, int y, int n, 
+                        int time, int[][] grid, boolean[][] visited) {
+        
+        if(x == n-1 && y == n-1 && grid[x][x] <= time) {
+            return true;
+        }
+
+        visited[x][y] = true;
+        for (int[] d : dirs) {
+            int nbrX = x + d[0];
+            int nbrY = y + d[1];
+
+            if(isValid(nbrX, nbrY, n) 
+                && !visited[nbrX][nbrY] 
+                && grid[nbrX][nbrY] <= time) {
+                boolean isPossible = dfs(nbrX, nbrY, n, time, grid, visited);
+                if(isPossible) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }
-
-
