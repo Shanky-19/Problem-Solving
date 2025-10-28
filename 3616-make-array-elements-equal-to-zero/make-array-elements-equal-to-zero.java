@@ -10,7 +10,6 @@ class Solution {
         int ans = 0;
         for(int i=0;i<n;i++) {
             leftSum += nums[i];
-
             if(nums[i] == 0) {
                 if(leftSum == rightSum[i]) {
                     ans += 2;
