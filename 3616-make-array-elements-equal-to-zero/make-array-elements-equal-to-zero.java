@@ -6,7 +6,6 @@ class Solution {
         for(int i=n-2;i>=0;i--) {
             rightSum[i] = rightSum[i+1] + nums[i];
         }
-
         int leftSum = 0;
         int ans = 0;
         for(int i=0;i<n;i++) {
