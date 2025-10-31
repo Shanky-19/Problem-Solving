@@ -1,16 +1,45 @@
+//Approach-2 (Using bit mask and XOR)
+//T.C : O(n)
+//S.C : O(1)
 class Solution {
     public int[] getSneakyNumbers(int[] nums) {
-        int[] ans = new int[2];
-        int i = 0;
-        Set<Integer> set = new HashSet<>();
-        for(int val : nums) {
-            if(set.contains(val)) {
-                ans[i] = val;
-                i++;
+        int n = nums.length - 2;
+        int XOR = 0; // a ^ b
+
+        // XOR of all numbers in nums
+        for (int num : nums) {
+            XOR ^= num;
+        }
+
+        // XOR of all numbers from 0 to n-1 (the original list)
+        for (int num = 0; num <= n - 1; num++) {
+            XOR ^= num;
+        }
+
+        // Find rightmost set bit (similar to __builtin_ctz in C++)
+        int trailZeroCount = Integer.numberOfTrailingZeros(XOR);
+        int mask = 1 << trailZeroCount;
+
+        int group1 = 0;
+        int group2 = 0;
+
+        // Separate into two groups based on mask bit
+        for (int num : nums) {
+            if ((num & mask) != 0) {
+                group1 ^= num;
             } else {
-                set.add(val);
+                group2 ^= num;
             }
         }
-        return ans;
+
+        for (int num = 0; num <= n - 1; num++) {
+            if ((num & mask) != 0) {
+                group1 ^= num;
+            } else {
+                group2 ^= num;
+            }
+        }
+
+        return new int[]{group1, group2};
     }
 }
