@@ -29,12 +29,6 @@ class Solution {
         if(root == null){
             return 0;
         }
-
-        // if(root.right == null){
-        //     int ht = height(root.left);
-        //     return (int)Math.pow(2,ht);
-        // }
-
         int ans1 = countNodes(root.left);
         int ans2 = countNodes(root.right);
         return ans1+ans2+1;
