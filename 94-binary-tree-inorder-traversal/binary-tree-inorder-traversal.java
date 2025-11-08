@@ -18,9 +18,27 @@ class Solution {
         List<Integer> ans = new ArrayList<>();
 
         // recursive
+        /*
         recursiveInorder(root, ans);
         return ans;
+        */
 
+
+        // Iterative
+        Stack<TreeNode> stack = new Stack<>();
+        TreeNode curr = root;
+        while (!stack.isEmpty() || curr != null) {
+            if (curr != null) {
+                stack.push(curr);
+                curr = curr.left;
+            }
+            else {
+                curr = stack.pop();
+                ans.add(curr.val);
+                curr = curr.right;
+            }
+        }
+        return ans;
 
     }
 
