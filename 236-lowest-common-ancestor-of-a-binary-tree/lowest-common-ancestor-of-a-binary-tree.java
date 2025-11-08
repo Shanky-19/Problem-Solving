@@ -21,7 +21,6 @@ class Solution {
         TreeNode right = lowestCommonAncestor(root.right, p, q);
 
         if (left != null && right != null) {
-            System.out.println("hi");
             return root;
         }
         return left == null ? right : left;
