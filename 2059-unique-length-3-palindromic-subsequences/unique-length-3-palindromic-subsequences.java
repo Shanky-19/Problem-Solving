@@ -3,12 +3,14 @@ class Solution {
         int n = s.length();
         Map<Character, List<Integer>> characterToItsFirstAndLastIndex = new HashMap<>();
         for(int i=0;i<n;i++){
+            
             char ch = s.charAt(i);
             if(characterToItsFirstAndLastIndex.containsKey(ch)){
                 List<Integer> firstAndLastIndex = characterToItsFirstAndLastIndex.get(ch);
                 firstAndLastIndex.set(1,i);
                 characterToItsFirstAndLastIndex.put(ch, firstAndLastIndex);
             }else{
+
                 List<Integer> firstAndLastIndex = new ArrayList<>();
                 firstAndLastIndex.add(i);
                 firstAndLastIndex.add(-1);
