@@ -3,23 +3,35 @@ class Solution {
     public int maxVowels(String s, int k) {
 
         Set<Character> vowels = Set.of('a', 'e', 'i', 'o', 'u');
+        int i = 0;
+        int j = 0;
+        int n = s.length();
+        int currCount = 0;
+        int ans = 0;
+        while (j < n) {
+            int winSize = j - i + 1;
+            char ch = s.charAt(j);
+            if(winSize <= k) {
+                if(vowels.contains(ch)) {
+                    currCount++;
+                } 
+                ans = Math.max(ans, currCount);
 
-        // Build the window of size k, count the number of vowels it contains.
-        int count = 0;
-        for (int i = 0; i < k; i++) {
-            count += vowels.contains(s.charAt(i)) ? 1 : 0;
+            } else {
+                if(vowels.contains(ch)) {
+                    currCount++;
+                } 
+                char c = s.charAt(i);
+                if(vowels.contains(c)) {
+                    currCount--;
+                }
+                i++;
+                ans = Math.max(ans, currCount);
+
+            }
+            j++;
         }
-        int answer = count;
-
-        // Slide the window to the right, focus on the added character and the
-        // removed character and update "count". Record the largest "count".
-        for (int i = k; i < s.length(); i++) {
-            count += vowels.contains(s.charAt(i)) ? 1 : 0;
-            count -= vowels.contains(s.charAt(i - k)) ? 1 : 0;
-            answer = Math.max(answer, count);
-        }
-        return answer;
-
+        return ans;
     }
 
 }
