@@ -3,7 +3,7 @@ class Solution {
         int n = nums.length;
         Deque<Integer> dq = new ArrayDeque<>();
         int[] ans = new int[n-k+1];
-        int j = 0;
+        int j = 0; // for traversing on ans
         for(int i=0;i<n;i++) {
             // step 1 : window size should be lesser or equal to k
             while(dq.size() > 0 && dq.getFirst() < i-k+1) {
