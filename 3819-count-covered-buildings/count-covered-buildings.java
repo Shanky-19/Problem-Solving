@@ -8,7 +8,6 @@ class Solution {
             this.max = max;
         }
     }
-
     public int countCoveredBuildings(int n, int[][] buildings) {
         Map<Integer, Pair> map1 = new HashMap<>();
         Map<Integer, Pair> map2 = new HashMap<>();
@@ -59,7 +58,6 @@ class Solution {
             if(xConditionSatified && yConditionSatified) {
                 ans++;
             }
-
         }
         return ans;
     }
