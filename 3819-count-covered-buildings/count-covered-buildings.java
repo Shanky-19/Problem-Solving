@@ -33,7 +33,6 @@ class Solution {
                 map2.put(y, new Pair(x,x));
             }
         }
-
         // for each x : we now have max y and min y
         // for each y : we now have max x and min x
         int ans = 0;
@@ -54,7 +53,6 @@ class Solution {
             if(p2.min < x && p2.max > x) {
                 xConditionSatified = true;
             }
-
             if(xConditionSatified && yConditionSatified) {
                 ans++;
             }
