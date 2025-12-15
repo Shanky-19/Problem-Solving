@@ -1,22 +1,5 @@
 class Solution {
     public int countCompleteSubstrings(String word, int k) {
-        // brute force
-        /*
-        int n = word.length();
-        int ans = 0;
-        for(int i=0;i<n;i++) {
-            for(int j=i+1;j<=n;j++) {
-                String subStr = word.substring(i, j);
-                boolean isComplete = checkIsComplete(subStr, k);
-                if(isComplete) {
-                    ans++;
-                }
-            }
-        }
-        return ans;
-        */
-
-
         // Sliding Window
         int n = word.length();
 
@@ -72,29 +55,4 @@ class Solution {
         }
         return result;
     }
-
-/*
-    private boolean checkIsComplete(String subStr, int k) {
-        Map<Character, Integer> fmap = new HashMap<>();
-        for(char ch : subStr.toCharArray()) {
-            fmap.put(ch, fmap.getOrDefault(ch, 0) + 1);
-        }
-
-        for(char ch : subStr.toCharArray()) {
-            if(fmap.get(ch) != k) {
-                return false;
-            }
-        }
-
-        for(int i=1;i<subStr.length();i++) {
-            char prev = subStr.charAt(i-1);
-            char curr = subStr.charAt(i);
-
-            if(Math.abs((int) curr-prev) > 2) {
-                return false;
-            }
-        }
-        return true;
-    }
-*/
 }
