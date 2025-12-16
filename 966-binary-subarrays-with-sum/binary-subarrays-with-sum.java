@@ -1,23 +1,24 @@
 class Solution {
     public int numSubarraysWithSum(int[] nums, int goal) {
-        // brute force
-        int n = nums.length;
-        int result = 0;
-        for(int i=0;i<n;i++) {
-            // subarrays which starts from nums[i]
-            int sum = nums[i];
-            int tempRes = 0;
-            if(sum == goal) {
-                tempRes++;
+        int ans = 0;
+        int sum = 0;
+        
+        HashMap<Integer,Integer> hm = new HashMap<>();
+        hm.put(sum,1);
+        
+        for(int val : nums){
+            sum += val;
+            
+            if(hm.containsKey(sum-goal)){
+                ans += hm.get(sum-goal);
             }
-            for(int j=i+1;j<n;j++) {
-                sum += nums[j];
-                if(sum == goal) {
-                    tempRes++;
-                }
+            
+            if(hm.containsKey(sum)){
+                hm.put(sum,hm.get(sum)+1);
+            }else{
+                hm.put(sum,1);
             }
-            result += tempRes;
         }
-        return result;
+        return ans;
     }
 }
