@@ -14,6 +14,7 @@ class Solution {
             }
 
             if (product < k) {
+                // no of subarrays ending at j
                 ans += (j-i+1);
             }
             j++;
