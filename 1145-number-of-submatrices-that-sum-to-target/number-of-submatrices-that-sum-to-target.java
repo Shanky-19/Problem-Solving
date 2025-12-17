@@ -1,16 +1,20 @@
 /*
-    Refers -> https://leetcode.com/problems/subarray-sum-equals-k/ -> Subarray Sum Equals K
+    Refers -> https://leetcode.com/problems/subarray-sum-equals-k/ 
+    -> Subarray Sum Equals K
     
     // start from row 1 
         1. find count of subarray sum equal to target using above question
-        2. go to next row2 -> add the elements from prev row, and with this modified row 
-           find the subarray sum equal to target. (this represents the subarray have row1 and row2)
+        2. go to next row2 -> add the elements from prev row, 
+            and with this modified row find the subarray sum equal to target. 
+            (this represents the subarray have row1 and row2)
         3. do this for row3 and so on (row1 and row2 and row3) and .....
 
     // start from row2 -> this row will remain constant
         1. find count of subarray sum equal to target using above question
-        2. go to next row3 -> add the elements from prev row, and with this modified row 
-           find the subarray sum equal to target. (this represents the subarray have row2 and row3)
+        2. go to next row3 -> add the elements from
+            prev row, and with this modified row 
+            find the subarray sum equal to target. 
+            (this represents the subarray have row2 and row3)
         3. do this for row3 and so on (row1 and row2 and row3) and .....
 
     // start from row3 and so on..
