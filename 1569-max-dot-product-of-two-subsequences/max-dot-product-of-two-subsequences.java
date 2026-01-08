@@ -1,44 +1,35 @@
-import java.util.*;
-
+//T.C : O(m*n)
+//S.C : O(m*n)
 class Solution {
-    int[] nums1, nums2;
-    int[][] memo;
-    int n, m;
-    final int NEG_INF = (int) -1e9;
+    int m, n;
+    int[][] t;
 
-    int dp(int i, int j) {
-        if (i == n || j == m)
-            return NEG_INF;
+    public int maxDotProduct(int[] nums1, int[] nums2) {
+        m = nums1.length;
+        n = nums2.length;
+        t = new int[501][501];
 
-        if (memo[i][j] != Integer.MIN_VALUE)
-            return memo[i][j];
+        for (int i = 0; i < 501; i++) {
+            Arrays.fill(t[i], -100000000);
+        }
 
-        int take = nums1[i] * nums2[j];
-
-        int res = Math.max(
-            Math.max(
-                take + dp(i + 1, j + 1), // take both and continue
-                take                    // take and end here
-            ),
-            Math.max(
-                dp(i + 1, j),           // skip nums1[i]
-                dp(i, j + 1)            // skip nums2[j]
-            )
-        );
-
-        return memo[i][j] = res;
+        return solve(nums1, nums2, 0, 0);
     }
 
-    public int maxDotProduct(int[] a, int[] b) {
-        nums1 = a;
-        nums2 = b;
-        n = nums1.length;
-        m = nums2.length;
+    public int solve(int[] nums1, int[] nums2, int i, int j) {
+        if (i == m || j == n)
+            return -100000000;
 
-        memo = new int[n][m];
-        for (int i = 0; i < n; i++)
-            Arrays.fill(memo[i], Integer.MIN_VALUE);
+        if (t[i][j] != -100000000)
+            return t[i][j];
 
-        return dp(0, 0);
+        int val = nums1[i] * nums2[j];
+
+        int take_i_j = solve(nums1, nums2, i + 1, j + 1) + val;
+        int take_i = solve(nums1, nums2, i, j + 1);
+        int take_j = solve(nums1, nums2, i + 1, j);
+
+        t[i][j] = Math.max(val, Math.max(take_i_j, Math.max(take_i, take_j)));
+        return t[i][j];
     }
 }
