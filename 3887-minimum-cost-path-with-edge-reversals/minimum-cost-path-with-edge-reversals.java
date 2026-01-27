@@ -18,9 +18,9 @@ class Solution {
     }
 
     public int minCost(int n, int[][] edges) {
-        List<Set<Pair>> graph = new ArrayList<>();
+        List<List<Pair>> graph = new ArrayList<>();
         for(int i=0;i<n;i++) {
-            graph.add(new HashSet<>());
+            graph.add(new ArrayList<>());
         }
         for(int[] edge : edges) {
             int u = edge[0];
