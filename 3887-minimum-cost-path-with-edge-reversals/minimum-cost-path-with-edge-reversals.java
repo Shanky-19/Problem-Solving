@@ -51,19 +51,14 @@ class Solution {
 
             int node = p.node;
             int d = p.wt;
-            // System.out.print(node + "->");
             for(Pair nbr : graph.get(node)) {
-
                 int dest = nbr.node;
                 int dist = nbr.wt;
-                // System.out.print(dest +  ",");
-
                 if(result[dest] > d + dist) {
                     result[dest] = d + dist;
                     pq.add(new Pair(dest, d + dist));
                 }
             }
-            // System.out.println();
         }
         if(result[n-1] == Integer.MAX_VALUE) {
             return -1;
