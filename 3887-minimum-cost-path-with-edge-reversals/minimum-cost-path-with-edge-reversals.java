@@ -28,17 +28,9 @@ class Solution {
             int w = edge[2];
 
             graph.get(u).add(new Pair(v, w));
+            graph.get(v).add(new Pair(u, 2*w));
         }
 
-        for(int[] edge : edges) {
-            int u = edge[0];
-            int v = edge[1];
-            int w = edge[2];
-
-            if(!graph.get(v).contains(u)) {
-                graph.get(v).add(new Pair(u, 2*w));
-            }
-        }
 
         // apply dijkstra's Algo 
         PriorityQueue<Pair> pq = new PriorityQueue<>();
