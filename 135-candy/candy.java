@@ -27,5 +27,8 @@ class Solution {
             ans += Math.max(left[i], right[i]);
         }
         return ans;
+
+        // Futher Optimization : 
+        // We can avoid right array and combine loop2 and loop3
     }
 }
