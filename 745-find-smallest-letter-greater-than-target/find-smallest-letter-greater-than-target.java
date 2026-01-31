@@ -1,6 +1,5 @@
 class Solution {
     public char nextGreatestLetter(char[] letters, char target) {
-
         // Linear
         /*
         for(char ch : letters){
@@ -10,7 +9,6 @@ class Solution {
         }
         return letters[0];
         */
-
         // Binary
         int si = 0;
         int ei = letters.length-1;
