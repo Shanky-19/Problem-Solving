@@ -53,10 +53,11 @@ class Solution {
 }
 
 /**
--> [1,0,1,2,1,1,7,5]
--> [0,1,0,1,0,1,0,1]
+-> customers = [1,0,1,2,1,1,7,5]
+-> grumpy    = [0,1,0,1,0,1,0,1]
+AND
+-> customers AND Grumpy = [0, 0, 0, 2, 0, 1, 0, 5]
 
--> [1, 0, 1, 0, 1, 0, 7, 0]
-
--> [0, 0, 0, 2, 0, 1, 0, 5]
+here take max sum subarray of size minutes -> there ability
+will be used
  */
