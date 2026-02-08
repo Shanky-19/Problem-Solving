@@ -4,8 +4,18 @@
 class Solution {
     public int longestSubarray(int[] nums, int limit) {
         int n = nums.length;
-        PriorityQueue<int[]> maxPq = new PriorityQueue<>((a, b) -> b[0] - a[0]); // max-heap
-        PriorityQueue<int[]> minPq = new PriorityQueue<>((a, b) -> a[0] - b[0]); // min-heap
+        // max-heap
+        PriorityQueue<int[]> maxPq = new PriorityQueue<>(
+            (a, b) -> {
+                return b[0] - a[0];
+            }
+        );
+        // min-heap
+        PriorityQueue<int[]> minPq = new PriorityQueue<>(
+            (a, b) -> {
+                return a[0] - b[0];
+            }
+        );
 
         int i = 0; // Left boundary of the sliding window
         int j = 0; // Right boundary of the sliding window
