@@ -22,6 +22,7 @@ class Solution {
         vals.add(node.val);
         inorder(node.right, vals);
     }
+    
     public TreeNode build(List<Integer> vals, int low, int high) {
         if(low > high) {
             return null;
@@ -32,9 +33,12 @@ class Solution {
         node.right = build(vals, mid + 1, high);
         return node;
     }
+
     public TreeNode balanceBST(TreeNode root) {
+
         List<Integer> vals = new ArrayList<>();
         inorder(root, vals);
         return build(vals, 0, vals.size() - 1);
+
     }
 }
