@@ -1,25 +1,33 @@
 class Solution {
     public int[] resultsArray(int[] nums, int k) {
-        int n = nums.length;
-        int i = 0;
-        int j = k-1;
-
-        int[] results = new int[n-k+1];
-        while(j < n) {
-            int power = findPower(nums, i, j);
-            results[i] = power;
-            j++;
-            i++;
+        if (k == 1) {
+            return nums.clone();
         }
-        return results;
-    }
-
-    private int findPower(int[] nums, int left, int right) {
-        for(int i=left;i<right;i++) {
-            if(nums[i+1] - nums[i] != 1) {
-                return -1;
+        
+        int n = nums.length;
+        List<Integer> result = new ArrayList<>();
+        Deque<Integer> window = new ArrayDeque<>();
+        
+        for (int i = 0; i < n; i++) {
+            // Remove elements outside window
+            while (!window.isEmpty() && i - window.peekFirst() >= k) {
+                window.pollFirst();
+            }
+            
+            // Check consecutive sequence
+            if (window.isEmpty() || nums[i] - nums[i-1] == 1) {
+                window.offerLast(i);
+            } else {
+                window.clear();
+                window.offerLast(i);
+            }
+            
+            // Add result when window size is k
+            if (i >= k-1) {
+                result.add(window.size() == k ? nums[i] : -1);
             }
         }
-        return nums[right];
+        
+        return result.stream().mapToInt(Integer::intValue).toArray();
     }
 }
