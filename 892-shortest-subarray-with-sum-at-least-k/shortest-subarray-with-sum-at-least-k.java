@@ -5,31 +5,38 @@ class Solution {
         int N = nums.length;
         
         Deque<Integer> deq = new LinkedList<>();
-        long[] cumulativeSum = new long[N];  // This stores the cumulative sum
+        // This stores the cumulative sum
+        long[] cumulativeSum = new long[N];  
         
         int result = Integer.MAX_VALUE;
         int j = 0;
 
-        // Compute cumulative sum in the cumulativeSum array using while loop
+        // Compute cumulative sum in the 
+        // cumulativeSum array using while loop
         while (j < N) {
             if (j == 0)
                 cumulativeSum[j] = nums[j];
             else
                 cumulativeSum[j] = cumulativeSum[j - 1] + nums[j];
             
-            // If the cumulative sum from the start to j is already >= k, update result
+            // If the cumulative sum from the 
+            // start to j is already >= k, update result
             if (cumulativeSum[j] >= k) 
                 result = Math.min(result, j + 1);
             
             // Remove indices from the deque where the subarray sum is >= k
             while (!deq.isEmpty() && cumulativeSum[j] - cumulativeSum[deq.getFirst()] >= k) {
-                result = Math.min(result, j - deq.getFirst());  // Calculate the length of the subarray
-                deq.removeFirst();  // Remove the front index from the deque
+                // Calculate the length of the subarray
+                result = Math.min(result, j - deq.getFirst());  
+                // Remove the front index from the deque
+                deq.removeFirst();  
             }
 
-            // Maintain the monotonic property of the deque (increasing order of cumulative sums)
+            // Maintain the monotonic property of the deque 
+            // (increasing order of cumulative sums)
             while (!deq.isEmpty() && cumulativeSum[j] <= cumulativeSum[deq.getLast()]) {
-                deq.removeLast();  // Remove indices that won't be useful
+                // Remove indices that won't be useful
+                deq.removeLast();  
             }
 
             // Add the current index to the deque
@@ -38,7 +45,8 @@ class Solution {
             j++;  // Increment j to move to the next index
         }
 
-        // Return the result if we found a valid subarray, otherwise return -1
+        // Return the result if we found a valid subarray, 
+        // otherwise return -1
         return result == Integer.MAX_VALUE ? -1 : result;
     }
 }
