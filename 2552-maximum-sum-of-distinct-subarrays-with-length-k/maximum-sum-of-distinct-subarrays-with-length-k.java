@@ -11,9 +11,9 @@ class Solution {
             fmap.put(val, fmap.getOrDefault(val, 0)+1);
             sum += val;
             int windowSize = j-i+1;
-            if(windowSize < k) {
-                j++;
-            } else {
+            // if(windowSize < k) {
+            //     j++;
+            // } else {
                 while (j-i+1 > k) {
                     fmap.put(nums[i], fmap.get(nums[i])-1);
                     if(fmap.get(nums[i]) == 0) {
@@ -28,7 +28,7 @@ class Solution {
                     ans = Math.max(ans, sum);
                 }
                 j++;
-            }
+            // }
         }
         return ans;
     }
