@@ -1,5 +1,6 @@
 // T.C : O(n+k)
-// S.C : O(1) (But you can mention you have to add k-1 extra elements so space complexity ideally should be O(k-1))
+// S.C : O(1) (But you can mention you have to add 
+// k-1 extra elements so space complexity ideally should be O(k-1))
 class Solution {
     public int numberOfAlternatingGroups(int[] colors, int k) {
         int n = colors.length;
