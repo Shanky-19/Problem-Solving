@@ -7,7 +7,9 @@ class Solution {
         int N = n + (k - 1);
 
         int[] extended = new int[N];
-        System.arraycopy(colors, 0, extended, 0, n);
+        for(int i=0;i<n;i++) {
+            extended[i] = colors[i];
+        }
         for (int i = 0; i < k - 1; i++) {
             extended[n + i] = colors[i]; // to handle wrap-around (circular array)
         }
