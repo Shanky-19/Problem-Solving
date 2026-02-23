@@ -3,8 +3,7 @@ class Solution {
         int n = s.length();
         Set<String> set = new HashSet<>();
         for(int i=0;i<=n-k;i++) {
-            String subString = s.substring(i, i+k);
-            set.add(subString);
+            set.add(s.substring(i, i+k));
         }
 
         if(set.size() == (int) (Math.pow(2, k))) {
