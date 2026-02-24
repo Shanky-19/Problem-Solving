@@ -1,52 +1,49 @@
 class Solution {
-    public int[] findXSum(int[] nums, int k, int x) {
-        int n = nums.length;
-        int[] result = new int[n - k + 1];
+    private int findTopXSum(Map<Integer, Integer> map, int x) {
+        PriorityQueue<int[]> pq = new PriorityQueue<>(
+            (a, b) -> (a[0] == b[0]) ? a[1] - b[1] : a[0] - b[0]
+        );
 
-        for (int i = 0; i < result.length; i++) {
-            result[i] = calculateXSumForSubarray(nums, i, i + k - 1, x);
+        for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
+            int freq = entry.getValue();
+            int val = entry.getKey();
+            pq.offer(new int[]{freq, val});
+
+            if (pq.size() > x) {
+                pq.poll();
+            }
         }
 
-        return result;
+        int sum = 0;
+        while (!pq.isEmpty()) {
+            int[] pair = pq.poll();
+            sum += pair[0] * pair[1];
+        }
+
+        return sum;
     }
 
-    private int calculateXSumForSubarray(int[] nums, int start, int end, int x) {
-        final int MAX_VALUE = 50;
-        int[] frequency = new int[MAX_VALUE + 1];
-        int distinctCount = 0;
+    public int[] findXSum(int[] nums, int k, int x) {
+        int n = nums.length;
+        Map<Integer, Integer> map = new HashMap<>();
+        List<Integer> result = new ArrayList<>();
 
-        int totalSum = 0;
-        for (int i = start; i <= end; i++) {
-            int num = nums[i];
-            totalSum += num;
-            if (frequency[num] == 0) {
-                distinctCount++;
-            }
-            frequency[num]++;
-        }
+        int i = 0, j = 0;
 
-        if (distinctCount < x) {
-            return totalSum;
-        }
+        while (j < n) {
+            map.put(nums[j], map.getOrDefault(nums[j], 0) + 1);
 
-        int resultSum = 0;
-        for (int selection = 0; selection < x; selection++) {
-            int bestNumber = -1;
-            int bestFrequency = -1;
+            if (j - i + 1 == k) {
+                result.add(findTopXSum(map, x));
 
-            for (int number = MAX_VALUE; number >= 1; number--) {
-                if (frequency[number] > bestFrequency) {
-                    bestFrequency = frequency[number];
-                    bestNumber = number;
-                }
+                map.put(nums[i], map.get(nums[i]) - 1);
+                if (map.get(nums[i]) == 0) map.remove(nums[i]);
+                i++;
             }
 
-            if (bestNumber != -1) {
-                resultSum += bestNumber * bestFrequency;
-                frequency[bestNumber] = 0; 
-            }
+            j++;
         }
-        
-        return resultSum;
+
+        return result.stream().mapToInt(Integer::intValue).toArray();
     }
 }
