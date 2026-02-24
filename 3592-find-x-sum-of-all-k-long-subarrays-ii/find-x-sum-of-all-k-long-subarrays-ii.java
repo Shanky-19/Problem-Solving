@@ -1,84 +1,107 @@
-import java.util.*;
-
+//T.C : O(nlogn)
+//S.C : O(k)
 class Solution {
-    private static final class Pair {
-        final int f, v;
-        Pair(int f, int v){ this.f = f; this.v = v; }
-        @Override public boolean equals(Object o){
-            if (this == o) return true;
-            if (!(o instanceof Pair)) return false;
-            Pair p = (Pair)o; return f == p.f && v == p.v;
-        }
-        @Override public int hashCode(){ return Objects.hash(f, v); }
-    }
-    private static final Comparator<Pair> DESC = (a, b) -> {
-        if (a.f != b.f) return Integer.compare(b.f, a.f);
-        return Integer.compare(b.v, a.v);
-    };
-
-    private Map<Integer,Integer> cnt;
-    private TreeSet<Pair> top, rest;
-    private long topSum;
-
-    private void pull(int v, int f){
-        Pair key = new Pair(f, v);
-        if (top.remove(key)) {
-            topSum -= 1L * f * v;
-        } else {
-            rest.remove(key);
-        }
-    }
-    private void pushToTop(int v, int f){
-        top.add(new Pair(f, v));
-        topSum += 1L * f * v;
-    }
-    private void insertVal(int v, int x){
-        int f = cnt.getOrDefault(v, 0);
-        if (f > 0) pull(v, f);
-        f += 1;
-        cnt.put(v, f);
-        pushToTop(v, f);
-        if (top.size() > x){
-            Pair worst = top.last();
-            top.remove(worst);
-            topSum -= 1L * worst.f * worst.v;
-            rest.add(worst);
-        }
-    }
-    private void eraseVal(int v, int x){
-        Integer F = cnt.get(v);
-        if (F == null || F == 0) return;
-        int f = F;
-        pull(v, f);
-        f -= 1;
-        if (f == 0) cnt.remove(v);
-        else {
-            cnt.put(v, f);
-            rest.add(new Pair(f, v));
-        }
-        if (top.size() < x && !rest.isEmpty()){
-            Pair best = rest.first();
-            rest.remove(best);
-            top.add(best);
-            topSum += 1L * best.f * best.v;
-        }
-    }
+    long sum = 0; //maintains sum of top x elements from main set
+    TreeSet<int[]> main; //contains top-x freq, elements
+    TreeSet<int[]> sec;  //contains remaining freq, elements
+    Map<Integer, Integer> freq; //element -> frequency
 
     public long[] findXSum(int[] nums, int k, int x) {
         int n = nums.length;
-        long[] ans = new long[n - k + 1];
-        cnt = new HashMap<>(Math.max(16, n * 2));
-        top = new TreeSet<>(DESC);
-        rest = new TreeSet<>(DESC);
-        topSum = 0;
+        sum = 0;
+        freq = new HashMap<>();
 
-        for (int i = 0; i < k; ++i) insertVal(nums[i], x);
-        ans[0] = topSum;
-        for (int i = k; i < n; ++i){
-            eraseVal(nums[i - k], x);
-            insertVal(nums[i], x);
-            ans[i - k + 1] = topSum;
+        // Comparator to sort by freq first, then by val (both ascending)
+        Comparator<int[]> comp = (a, b) -> {
+            if (a[0] != b[0]) return Integer.compare(a[0], b[0]);
+            return Integer.compare(a[1], b[1]);
+        };
+
+        main = new TreeSet<>(comp);
+        sec = new TreeSet<>(comp);
+
+        List<Long> resultList = new ArrayList<>();
+
+        int i = 0;
+        int j = 0;
+        while (j < n) {
+            int num = nums[j];
+
+            // If already present, remove old (freq, val)
+            if (freq.getOrDefault(num, 0) > 0) {
+                removeFromSet(new int[]{freq.get(num), num}, x);
+            }
+
+            // Increase frequency
+            freq.put(num, freq.getOrDefault(num, 0) + 1);
+
+            // Insert updated pair
+            insertInSet(new int[]{freq.get(num), num}, x);
+
+            // When window size becomes k
+            if (j - i + 1 == k) {
+                resultList.add(sum);
+
+                // Remove outgoing element
+                int outNum = nums[i];
+                removeFromSet(new int[]{freq.get(outNum), outNum}, x);
+                freq.put(outNum, freq.get(outNum) - 1);
+
+                if (freq.get(outNum) == 0) {
+                    freq.remove(outNum);
+                } else {
+                    insertInSet(new int[]{freq.get(outNum), outNum}, x);
+                }
+
+                i++;
+            }
+
+            j++;
         }
-        return ans;
+
+        // Convert List<Long> to long[]
+        long[] result = new long[resultList.size()];
+        for (int idx = 0; idx < resultList.size(); idx++) {
+            result[idx] = resultList.get(idx);
+        }
+        return result;
+    }
+
+    void insertInSet(int[] p, int x) {
+        if (main.size() < x || comparePairs(p, main.first()) > 0) {
+            sum += 1L * p[0] * p[1];
+            main.add(p);
+
+            if (main.size() > x) {
+                int[] smallest = main.first();
+                sum -= 1L * smallest[0] * smallest[1];
+                main.remove(smallest);
+                sec.add(smallest);
+            }
+        } else {
+            sec.add(p);
+        }
+    }
+
+    void removeFromSet(int[] p, int x) {
+        if (main.contains(p)) {
+            sum -= 1L * p[0] * p[1];
+            main.remove(p);
+
+            if (!sec.isEmpty()) {
+                int[] largest = sec.last();
+                sec.remove(largest);
+                main.add(largest);
+                sum += 1L * largest[0] * largest[1];
+            }
+        } else {
+            sec.remove(p);
+        }
+    }
+
+    // Helper comparison to mimic pair comparison from C++
+    int comparePairs(int[] a, int[] b) {
+        if (a[0] != b[0]) return Integer.compare(a[0], b[0]);
+        return Integer.compare(a[1], b[1]);
     }
 }
