@@ -1,13 +1,16 @@
+//Approach-1 (Using lo2(n) to find bits count)
+//T.C : O(n)
+//S.C : O(n)
 class Solution {
     public int concatenatedBinary(int n) {
-        final int MOD = 1_000_000_007;
-        long res = 0;
-        int bits = 0;
-
-        for(int i=1; i<=n; i++){
-            if((i & (i-1)) == 0) bits++;
-            res = ((res<<bits) | i) % MOD;
+        long result = 0;
+        int M = 1_000_000_007;
+        
+        for (int i = 1; i <= n; i++) {
+            int digits = (int)(Math.log(i) / Math.log(2)) + 1;
+            result = ((result << digits) % M + i) % M;
         }
-        return (int)res;
+        
+        return (int) result;
     }
 }
