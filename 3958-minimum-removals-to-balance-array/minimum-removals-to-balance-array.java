@@ -1,5 +1,4 @@
 class Solution {
-
     private int helper(int[] nums, int i, int j, int k, int[][] dp) {
         if(i == j) {
             return 0;
@@ -32,7 +31,6 @@ class Solution {
         // int ans = helper(nums, i, j, k, dp);
         // return ans;
 
-
         // Intuition
         /*
             The problem asks for the minimum number of removals to satisfy the condition max≤min×k. 
@@ -45,7 +43,6 @@ class Solution {
         Arrays.sort(nums);
         int i = 0;
         int maxLen = 0;
-
         for (int j = 0; j < nums.length; j++) {
             // Use long to prevent integer overflow for nums[i] * k
             while ((long) nums[j] > (long) nums[i] * k) {
@@ -53,8 +50,6 @@ class Solution {
             }
             maxLen = Math.max(maxLen, j - i + 1);
         }
-
         return nums.length - maxLen;
-        
     }
 }
