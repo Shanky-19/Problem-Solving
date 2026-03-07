@@ -33,12 +33,18 @@ class Solution {
 
         // Intuition
         /*
-            The problem asks for the minimum number of removals to satisfy the condition max≤min×k. 
-            This is equivalent to finding the maximum number of elements we can keep. 
-            If we sort the array, any subset of elements that satisfies the condition will form 
-            a contiguous subarray. For any subarray starting at index i and ending at index j (where i≤j), 
-            the minimum is nums[i] and the maximum is nums[j]. Thus, the problem simplifies to finding 
-            the longest subarray where nums[j]≤nums[i]×k in a sorted array.
+            The problem asks for the minimum number of removals 
+            to satisfy the condition max≤min×k. 
+            This is equivalent to finding the maximum number 
+            of elements we can keep. 
+            If we sort the array, any subset of
+             elements that satisfies the condition will form 
+            a contiguous subarray. For any subarray starting at
+             index i and ending at index j (where i≤j), 
+            the minimum is nums[i] and the maximum is nums[j]. 
+            Thus, the problem simplifies to finding 
+            the longest subarray where nums[j]≤nums[i]×k 
+            in a sorted array.
         */
         Arrays.sort(nums);
         int i = 0;
