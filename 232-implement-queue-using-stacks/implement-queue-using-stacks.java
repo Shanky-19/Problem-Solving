@@ -1,47 +1,45 @@
+//T.C : push - O(1), pop - Amortized O(1) , peek() - O(1), empty() - O(1)
+//S.C : O(n)
 class MyQueue {
-    Stack<Integer> st1;
-    Stack<Integer> st2;
+    private Stack<Integer> input;
+    private Stack<Integer> output;
+    private int peekEl;
+
     public MyQueue() {
-        st1 = new Stack<>();
-        st2 = new Stack<>();
+        input = new Stack<>();
+        output = new Stack<>();
+        peekEl = -1;
     }
-    
+
     public void push(int x) {
-        st1.push(x);
+        if (input.empty()) {
+            peekEl = x;
+        }
+        input.push(x);
     }
-    
+
+    // Amortized O(1)
     public int pop() {
-        while(st1.size() > 0){
-            st2.push(st1.pop());
+        if (output.empty()) {
+            // Transfer elements from input to output (O(n))
+            while (!input.empty()) {
+                output.push(input.pop());
+            }
         }
-        int val = st2.pop();
-        while(st2.size() > 0){
-            st1.push(st2.pop());
-        }
+
+        int val = output.pop();
         return val;
     }
-    
+
     public int peek() {
-        while(st1.size() > 0){
-            st2.push(st1.pop());
+        if (output.empty()) {
+            return peekEl;
         }
-        int val = st2.peek();
-        while(st2.size() > 0){
-            st1.push(st2.pop());
-        }
-        return val;
+
+        return output.peek();
     }
-    
+
     public boolean empty() {
-        return st1.size() == 0;
+        return input.empty() && output.empty();
     }
 }
-
-/**
- * Your MyQueue object will be instantiated and called as such:
- * MyQueue obj = new MyQueue();
- * obj.push(x);
- * int param_2 = obj.pop();
- * int param_3 = obj.peek();
- * boolean param_4 = obj.empty();
- */
