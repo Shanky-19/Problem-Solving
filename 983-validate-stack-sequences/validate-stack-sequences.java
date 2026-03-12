@@ -8,18 +8,18 @@ class Solution {
             int pop = popped[j];
             int push = pushed[i];
 
-            if(stack.size() == 0) {
-                stack.push(push);
-                i++;
-            } else {
-                if(stack.peek() == pop) {
+            // if(stack.size() == 0) {
+            //     stack.push(push);
+            //     i++;
+            // } else {
+                if(stack.size() > 0 && stack.peek() == pop) {
                     stack.pop();
                     j++;
                 } else {
                     stack.push(push);
                     i++;
                 }
-            }
+            // }
         }
         
         while(j < n) {
