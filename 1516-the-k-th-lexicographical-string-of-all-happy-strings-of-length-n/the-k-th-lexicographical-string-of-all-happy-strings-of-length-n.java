@@ -11,7 +11,6 @@ class Solution {
                 return "";
             }
         }
-
         int maxPossibleStrings = 3 * (int)Math.pow(2,n-1);
         if(k > maxPossibleStrings){
             return "";
