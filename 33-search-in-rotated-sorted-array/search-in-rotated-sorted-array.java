@@ -5,7 +5,7 @@ class Solution {
         int high = nums.length-1;        
         // smallest element idx = pivot index (where rotation happened)
         int pivotIdx = findPivot(nums, low, high);
-        System.out.println(pivotIdx);
+        // System.out.println(pivotIdx);
         int idx1 = binarySearch(nums, low, pivotIdx, target);
         if(nums[idx1] == target) {
             return idx1;
