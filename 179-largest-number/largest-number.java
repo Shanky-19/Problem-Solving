@@ -8,11 +8,11 @@ class Solution {
 
         Arrays.sort(arr, new Comparator<String>() {
             public int compare(String a, String b) {
-                return (a+b).compareTo(b+a); // asc order
+                return (b+a).compareTo(a+b); // desc order
             }
         });
         StringBuilder sb = new StringBuilder();
-        for(int i=n-1;i>=0;i--) {
+        for(int i=0;i<n;i++) {
             sb.append(arr[i]);
         }
 
