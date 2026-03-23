@@ -2,12 +2,9 @@ class Solution {
     public int maxProductPath(int[][] grid) {
         int m = grid.length, n = grid[0].length;
         long MOD = (long)1e9 + 7;
-
         long[][] maxDp = new long[m][n];
         long[][] minDp = new long[m][n];
-
         maxDp[0][0] = minDp[0][0] = grid[0][0];
-
         for (int i = 1; i < m; i++) {
             maxDp[i][0] = minDp[i][0] = maxDp[i-1][0] * grid[i][0];
         }
