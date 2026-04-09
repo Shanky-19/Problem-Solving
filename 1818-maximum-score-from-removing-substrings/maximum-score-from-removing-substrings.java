@@ -25,21 +25,23 @@ class Solution {
         return score;
     }
 
+
+
     private String removeSubstringConstantSpace(String inputString, 
                                                 String matchStr) {
         StringBuilder sb = new StringBuilder();
-        int j = 0;
+        int i = 0;
 
-        for (int i = 0; i < inputString.length(); i++) {
-            sb.append(inputString.charAt(i));
-            j++;
+        for (int j = 0; j < inputString.length(); j++) {
+            sb.append(inputString.charAt(j));
+            i++;
 
-            if (j > 1 && 
-                sb.charAt(j - 2) == matchStr.charAt(0) 
-                && sb.charAt(j - 1) == matchStr.charAt(1)) {
+            if (i > 1 && 
+                sb.charAt(i - 2) == matchStr.charAt(0) 
+                && sb.charAt(i - 1) == matchStr.charAt(1)) {
                 
-                sb.delete(j - 2, j);
-                j -= 2;
+                sb.delete(i - 2, i);
+                i -= 2;
 
             }
         }
