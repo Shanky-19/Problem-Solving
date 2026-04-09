@@ -25,23 +25,6 @@ class Solution {
         return score;
     }
 
-    private String removeSubstring(String s, String matchStr) {
-        Stack<Character> stack = new Stack<>();
-        for (char ch : s.toCharArray()) {
-            if (!stack.isEmpty() && ch == matchStr.charAt(1) 
-                && stack.peek() == matchStr.charAt(0)) {
-                stack.pop();
-            } else {
-                stack.push(ch);
-            }
-        }
-        StringBuilder remainStr = new StringBuilder();
-        while (!stack.isEmpty()) {
-            remainStr.append(stack.pop());
-        }
-        return remainStr.reverse().toString();
-    }
-
     private String removeSubstringConstantSpace(String inputString, 
                                                 String matchStr) {
         StringBuilder sb = new StringBuilder();
