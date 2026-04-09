@@ -29,13 +29,13 @@ class Solution {
         Stack<Character> stack = new Stack<>();
 
         for (char ch : s.toCharArray()) {
-            if (!stack.isEmpty() && ch == matchStr.charAt(1) && stack.peek() == matchStr.charAt(0)) {
+            if (!stack.isEmpty() && ch == matchStr.charAt(1) 
+                && stack.peek() == matchStr.charAt(0)) {
                 stack.pop();
             } else {
                 stack.push(ch);
             }
         }
-
         StringBuilder remainStr = new StringBuilder();
         while (!stack.isEmpty()) {
             remainStr.append(stack.pop());
