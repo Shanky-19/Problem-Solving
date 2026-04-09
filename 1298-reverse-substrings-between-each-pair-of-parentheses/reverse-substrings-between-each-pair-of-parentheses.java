@@ -1,26 +1,31 @@
 class Solution {
     public String reverseParentheses(String s) {
         int n = s.length();
-        Stack<Character> st = new Stack<>();
-        for(int i=0;i<n;i++) {
-            char ch = s.charAt(i);
-            if(ch == ')') {
-                StringBuilder sb = new StringBuilder();
-                while (st.peek() != '(') {
-                    sb.append(st.pop());
-                }
-                st.pop();
-                for(char c : sb.toString().toCharArray()) {
-                    st.push(c);
-                }
-            } else {
-                st.push(ch);
+        Stack<Integer> openBracket = new Stack<>();
+        int[] door = new int[n];
+
+        // First pass: Pair up parentheses
+        for (int i = 0; i < n; ++i) {
+            if (s.charAt(i) == '(') {
+                openBracket.push(i);
+            } else if (s.charAt(i) == ')') {
+                int j = openBracket.pop();
+                door[i] = j;
+                door[j] = i;
             }
         }
-        StringBuilder sb = new StringBuilder();
-        while (st.size() > 0) {
-            sb.append(st.pop());
+
+        // Second pass: Build the result string
+        StringBuilder result = new StringBuilder();
+        int direction = 1; // Left to Right
+        for (int i = 0; i < n; i += direction) {
+            if (s.charAt(i) == '(' || s.charAt(i) == ')') {
+                i = door[i];
+                direction = -direction;
+            } else {
+                result.append(s.charAt(i));
+            }
         }
-        return sb.reverse().toString();
+        return result.toString();
     }
 }
