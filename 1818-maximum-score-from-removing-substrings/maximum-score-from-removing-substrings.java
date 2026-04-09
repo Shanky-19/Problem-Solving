@@ -13,12 +13,12 @@ class Solution {
         }
 
         // First Pass
-        String tempFirst = removeSubstring(s, maxStr);
+        String tempFirst = removeSubstringConstantSpace(s, maxStr);
         int removedPairsCount = (n - tempFirst.length()) / 2;
         score += removedPairsCount * Math.max(x, y);
 
         // Second Pass
-        String tempSecond = removeSubstring(tempFirst, minStr);
+        String tempSecond = removeSubstringConstantSpace(tempFirst, minStr);
         removedPairsCount = (tempFirst.length() - tempSecond.length()) / 2;
         score += removedPairsCount * Math.min(x, y);
 
@@ -27,7 +27,6 @@ class Solution {
 
     private String removeSubstring(String s, String matchStr) {
         Stack<Character> stack = new Stack<>();
-
         for (char ch : s.toCharArray()) {
             if (!stack.isEmpty() && ch == matchStr.charAt(1) 
                 && stack.peek() == matchStr.charAt(0)) {
@@ -41,5 +40,27 @@ class Solution {
             remainStr.append(stack.pop());
         }
         return remainStr.reverse().toString();
+    }
+
+    private String removeSubstringConstantSpace(String inputString, 
+                                                String matchStr) {
+        StringBuilder sb = new StringBuilder();
+        int j = 0;
+
+        for (int i = 0; i < inputString.length(); i++) {
+            sb.append(inputString.charAt(i));
+            j++;
+
+            if (j > 1 && 
+                sb.charAt(j - 2) == matchStr.charAt(0) 
+                && sb.charAt(j - 1) == matchStr.charAt(1)) {
+                
+                sb.delete(j - 2, j);
+                j -= 2;
+
+            }
+        }
+
+        return sb.toString();
     }
 }
