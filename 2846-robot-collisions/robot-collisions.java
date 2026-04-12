@@ -14,7 +14,9 @@ class Solution {
 
         Stack<Integer> stack = new Stack<>();
 
-        Arrays.sort(indices, (i, j) -> Integer.compare(positions[i], positions[j]));
+        Arrays.sort(indices, (i, j) -> {
+            return Integer.compare(positions[i], positions[j]);
+        });
 
         List<Integer> result = new ArrayList<>();
         
