@@ -29,7 +29,9 @@ class Solution {
                     top.put(key, value * multiplier);
                 }
                 for (String key : top.keySet()) {
-                    stack.peek().put(key, stack.peek().getOrDefault(key, 0) + top.get(key));
+                    stack.peek().put(key, 
+                        stack.peek().getOrDefault(key, 0) 
+                            + top.get(key));
                 }
             } else {
                 StringBuilder element = new StringBuilder();
@@ -42,8 +44,11 @@ class Solution {
                     sb.append(formula.charAt(i++));
                 }
                 int count = sb.length() > 0 ? Integer.parseInt(sb.toString()) : 1;
-                stack.peek().put(element.toString(), 
-                                stack.peek().getOrDefault(element.toString(), 0) + count);
+                stack
+                    .peek()
+                    .put(element.toString(), 
+                            stack.peek().getOrDefault(element.toString(), 0) 
+                            + count);
             }
         }
 
