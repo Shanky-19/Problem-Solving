@@ -6,18 +6,14 @@ class Solution {
         for (int i = 0; i < n; i++) {
             map.computeIfAbsent(nums[i], k -> new ArrayList<>()).add(i);
         }
-
         List<Integer> ans = new ArrayList<>();
-
         for (int q : queries) {
             List<Integer> v = map.get(nums[q]);
-
             // only one time present
             if (v.size() == 1) {
                 ans.add(-1);
                 continue;
             }
-
             int pos = Collections.binarySearch(v, q);
             int res = Integer.MAX_VALUE;
             // left neighbor
