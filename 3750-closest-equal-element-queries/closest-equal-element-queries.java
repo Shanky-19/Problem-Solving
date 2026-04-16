@@ -2,7 +2,6 @@ class Solution {
     public List<Integer> solveQueries(int[] nums, int[] queries) {
         int n = nums.length;
         Map<Integer, List<Integer>> map = new HashMap<>();
-
         // store indices
         for (int i = 0; i < n; i++) {
             map.computeIfAbsent(nums[i], k -> new ArrayList<>()).add(i);
@@ -21,7 +20,6 @@ class Solution {
 
             int pos = Collections.binarySearch(v, q);
             int res = Integer.MAX_VALUE;
-
             // left neighbor
             int left = v.get((pos - 1 + v.size()) % v.size());
             int d1 = Math.abs(q - left);
