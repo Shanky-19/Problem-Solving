@@ -1,46 +1,37 @@
 class Solution {
     public boolean canBeValid(String s, String locked) {
         int n = s.length();
-        Stack<Integer> stack = new Stack<>();
-        Stack<Integer> flexible = new Stack<>();
 
-        for (int i=0;i<n;i++) {
-            char ch = s.charAt(i);
-            int lock = locked.charAt(i);
+        if (n % 2 != 0) { // odd
+            return false;
+        }
 
-            if(ch =='(' && lock == '1') {
-                // add to stack
-                stack.push(i);
-            } else if (ch == ')' && lock == '1') {
-                // check in stack
-                if(stack.size() > 0) {
-                    stack.pop();
-                } else if (flexible.size() > 0 
-                    && flexible.peek() < i) {
-                    // check in flexible
-                    flexible.pop();
+        Stack<Integer> open = new Stack<>();
+        Stack<Integer> openClose = new Stack<>();
+
+        for (int i = 0; i < n; i++) {
+            if (locked.charAt(i) == '0') {
+                openClose.push(i);
+            } else if (s.charAt(i) == '(') {
+                open.push(i);
+            } else if (s.charAt(i) == ')') {
+                if (!open.isEmpty()) {
+                    open.pop();
+                } else if (!openClose.isEmpty()) {
+                    openClose.pop();
                 } else {
                     return false;
                 }
-            } else {
-                flexible.push(i);
-            }
-        }
-        while (stack.size() > 0) {
-            if(flexible.size() == 0) {
-                return false;
-            }
-            int top = stack.pop();
-            if(top > flexible.peek()) {
-                return false;
-            } else{
-                flexible.pop();
             }
         }
 
-        if(flexible.size()%2 != 0) {
-            return false;
+        while (!open.isEmpty() 
+                && !openClose.isEmpty() 
+                && open.peek() < openClose.peek()) {
+            open.pop();
+            openClose.pop();
         }
-        return true;
+
+        return open.isEmpty(); // true
     }
 }
