@@ -6,7 +6,8 @@ class Solution {
         List<Integer> result = new ArrayList<>();
 
         for (int num : nums) {
-            // Keep merging while the last number and current num are non-coprime
+            // Keep merging while the last number 
+            // and current num are non-coprime
             while (!result.isEmpty()) {
                 int prev = result.get(result.size() - 1);
                 int gcd = gcd(prev, num);
@@ -17,7 +18,8 @@ class Solution {
 
                 // Remove last and merge with current
                 result.remove(result.size() - 1);
-                long lcm = ((long) prev / gcd) * num; // use long to avoid overflow
+                // use long to avoid overflow
+                long lcm = ((long) prev / gcd) * num; 
                 num = (int) lcm;
             }
             result.add(num);
