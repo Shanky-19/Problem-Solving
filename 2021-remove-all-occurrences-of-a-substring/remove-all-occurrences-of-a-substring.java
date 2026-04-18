@@ -1,42 +1,20 @@
-//Approach-2 (Using Stack)
+//Approach-3 (Using String as a Stack)
 //T.C : O(m*n)
-//S.C : O(m)
+//S.C : O(1), not considering result as extra space
 class Solution {
-    private boolean check(Stack<Character> st, String part, int n) {
-        Stack<Character> tempSt = new Stack<>();
-        tempSt.addAll(st);
-
-        for (int idx = n - 1; idx >= 0; idx--) {
-            if (tempSt.peek() != part.charAt(idx)) {
-                return false;
-            }
-
-            tempSt.pop();
-        }
-
-        return true;
-    }
-
     public String removeOccurrences(String s, String part) {
-        Stack<Character> st = new Stack<>();
-        int m = s.length();
+        StringBuilder result = new StringBuilder();
         int n = part.length();
 
-        for (int i = 0; i < m; i++) {
-            st.push(s.charAt(i));
+        for (char ch : s.toCharArray()) {
+            result.append(ch);
 
-            if (st.size() >= n && check(st, part, n)) {
-                for (int j = 0; j < n; j++) {
-                    st.pop();
-                }
+            if (result.length() >= n 
+                && result.substring(result.length() - n).equals(part)) {
+                result.delete(result.length() - n, result.length());
             }
         }
 
-        StringBuilder result = new StringBuilder();
-        while (!st.isEmpty()) {
-            result.append(st.pop());
-        }
-
-        return result.reverse().toString();
+        return result.toString();
     }
 }
