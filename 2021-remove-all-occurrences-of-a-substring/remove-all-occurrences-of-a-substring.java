@@ -1,21 +1,42 @@
-//Approach-1 (Brute Force)
+//Approach-2 (Using Stack)
 //T.C : O(m*n)
-//S.C : O(1)
+//S.C : O(m)
 class Solution {
-    public String removeOccurrences(String s, String part) {
-        // s.length() = m
-        // part.length() = n;
-        // O(m*n)
-        while (true) {
-            int idx = s.indexOf(part);
+    private boolean check(Stack<Character> st, String part, int n) {
+        Stack<Character> tempSt = new Stack<>();
+        tempSt.addAll(st);
 
-            if (idx == -1) {
-                break;
+        for (int idx = n - 1; idx >= 0; idx--) {
+            if (tempSt.peek() != part.charAt(idx)) {
+                return false;
             }
 
-            s = s.substring(0, idx) + s.substring(idx + part.length());
+            tempSt.pop();
         }
 
-        return s;
+        return true;
+    }
+
+    public String removeOccurrences(String s, String part) {
+        Stack<Character> st = new Stack<>();
+        int m = s.length();
+        int n = part.length();
+
+        for (int i = 0; i < m; i++) {
+            st.push(s.charAt(i));
+
+            if (st.size() >= n && check(st, part, n)) {
+                for (int j = 0; j < n; j++) {
+                    st.pop();
+                }
+            }
+        }
+
+        StringBuilder result = new StringBuilder();
+        while (!st.isEmpty()) {
+            result.append(st.pop());
+        }
+
+        return result.reverse().toString();
     }
 }
