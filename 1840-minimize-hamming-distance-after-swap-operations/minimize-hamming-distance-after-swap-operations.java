@@ -1,64 +1,72 @@
+//Approach - (DSU + map)
+//T.C : O(n + m*alpha(n)), alpha(n) = inverse Ackermann function.
+//S.C : O(n)
 class Solution {
 
-    int[] parent, rank;
+    private void union (int[] rank, int[] parent,int u, int v) {
+        int parentU = find(u, parent);
+        int parentV = find(v, parent);
 
-    int find(int x){
-        if(parent[x] != x)
-            parent[x] = find(parent[x]);
-        return parent[x];
-    }
-
-    void unite(int a, int b){
-        a = find(a);
-        b = find(b);
-        if(a == b) return;
-
-        if(rank[a] < rank[b]){
-            int temp = a;
-            a = b;
-            b = temp;
+        if(parentU == parentV) {
+            return;
+        } else if(rank[parentU] > rank[parentV]) {
+            parent[parentV] = parentU;
+        } else if(rank[parentV] > rank[parentU]) {
+            parent[parentU] = parentV;
+        } else {
+            parent[parentU] = parentV;
+            rank[parentV]++;
         }
-
-        parent[b] = a;
-        if(rank[a] == rank[b]) rank[a]++;
     }
+
+    private int find(int u, int[] parent) {
+        if(u == parent[u]) {
+            return u;
+        }
+        return parent[u] = find(parent[u], parent);
+    }
+
 
     public int minimumHammingDistance(int[] source, int[] target, int[][] allowedSwaps) {
         int n = source.length;
 
-        parent = new int[n];
-        rank = new int[n];
+        int[] parent = new int[n];
+        int[] rank = new int[n];
 
-        for(int i=0;i<n;i++) parent[i] = i;
-
-        for(int[] e : allowedSwaps){
-            unite(e[0], e[1]);
+        for (int i = 0; i < n; i++) {
+            parent[i] = i;
         }
 
-        Map<Integer, List<Integer>> groups = new HashMap<>();
-
-        for(int i=0;i<n;i++){
-            int root = find(i);
-            groups.computeIfAbsent(root, k -> new ArrayList<>()).add(i);
+        // Union of allowedSwaps
+        for (int[] edge : allowedSwaps) {
+            union(rank, parent, edge[0], edge[1]);
         }
 
-        int ans = 0;
+        // group -> (value -> freq)
+        Map<Integer, Map<Integer, Integer>> groupFreq = new HashMap<>();
 
-        for(List<Integer> idxs : groups.values()){
-            Map<Integer,Integer> freq = new HashMap<>();
+        for (int i = 0; i < n; i++) {
+            int root = find(i,parent);
 
-            for(int i : idxs)
-                freq.put(source[i], freq.getOrDefault(source[i],0)+1);
+            groupFreq.putIfAbsent(root, new HashMap<>());
+            Map<Integer, Integer> freqMap = groupFreq.get(root);
 
-            for(int i : idxs){
-                if(freq.getOrDefault(target[i],0) > 0){
-                    freq.put(target[i], freq.get(target[i]) - 1);
-                }else{
-                    ans++;
-                }
+            freqMap.put(source[i], freqMap.getOrDefault(source[i], 0) + 1);
+        }
+
+        int hammingDistance = 0;
+
+        for (int i = 0; i < n; i++) {
+            int root = find(i,parent);
+            Map<Integer, Integer> freqMap = groupFreq.get(root);
+
+            if (freqMap.getOrDefault(target[i], 0) > 0) {
+                freqMap.put(target[i], freqMap.get(target[i]) - 1);
+            } else {
+                hammingDistance++;
             }
         }
 
-        return ans;
+        return hammingDistance;
     }
 }
