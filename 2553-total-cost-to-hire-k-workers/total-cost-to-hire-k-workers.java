@@ -5,21 +5,13 @@ class Solution {
         PriorityQueue<Integer> pq1 = new PriorityQueue<>();
         PriorityQueue<Integer> pq2 = new PriorityQueue<>();
 
-        while (pq1.size() < candidates && i <= j) {
-            pq1.offer(costs[i++]);
-        }
-        while (pq2.size() < candidates && i <= j) {
-            pq2.offer(costs[j--]);
-        }
-
-
         long ans = 0;
         while (k-- > 0) {
-            if (pq1.size() < candidates && i <= j) {
-                pq1.offer(costs[i++]);
+            while (pq1.size() < candidates && i <= j) {
+                pq1.add(costs[i++]);
             }
-            if (pq2.size() < candidates && i <= j) {
-                pq2.offer(costs[j--]);
+            while (pq2.size() < candidates && i <= j) {
+                pq2.add(costs[j--]);
             }
 
             int t1 = pq1.size() > 0 ? pq1.peek() : Integer.MAX_VALUE;
@@ -27,10 +19,10 @@ class Solution {
 
             if (t1 <= t2) {
                 ans += t1;
-                pq1.poll();
+                pq1.remove();
             } else {
                 ans += t2;
-                pq2.poll();
+                pq2.remove();
             }
         }
         return ans;
