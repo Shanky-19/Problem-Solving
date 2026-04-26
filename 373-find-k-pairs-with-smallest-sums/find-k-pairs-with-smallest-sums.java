@@ -20,7 +20,8 @@ class Solution {
         }
     }
 
-    public List<List<Integer>> kSmallestPairs(int[] nums1, int[] nums2, int k) {
+    public List<List<Integer>> kSmallestPairs(int[] nums1, 
+                                int[] nums2, int k) {
         PriorityQueue<Pair> pq = new PriorityQueue<>();
         int n = nums1.length;
         int m = nums2.length;
