@@ -34,8 +34,11 @@ class Solution {
 
         for(int i=k;i<arr.length;i++){
             int minVal = arr[i].val2;
-            int rmv = pq.remove(); // removing the lowest value so sum is maximized
-            pq.add(arr[i].val1); // if our min is arr[i].val2 then sum must contain this
+            // removing the lowest value so sum is maximized
+            int rmv = pq.remove();
+
+             // if our min is arr[i].val2 then sum must contain this
+            pq.add(arr[i].val1);
 
             sum -= rmv;
             sum += arr[i].val1;
