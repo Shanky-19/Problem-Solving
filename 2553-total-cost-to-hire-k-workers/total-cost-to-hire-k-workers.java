@@ -5,12 +5,20 @@ class Solution {
         PriorityQueue<Integer> pq1 = new PriorityQueue<>();
         PriorityQueue<Integer> pq2 = new PriorityQueue<>();
 
+        while (pq1.size() < candidates && i <= j) {
+            pq1.offer(costs[i++]);
+        }
+        while (pq2.size() < candidates && i <= j) {
+            pq2.offer(costs[j--]);
+        }
+
+
         long ans = 0;
         while (k-- > 0) {
-            while (pq1.size() < candidates && i <= j) {
+            if (pq1.size() < candidates && i <= j) {
                 pq1.offer(costs[i++]);
             }
-            while (pq2.size() < candidates && i <= j) {
+            if (pq2.size() < candidates && i <= j) {
                 pq2.offer(costs[j--]);
             }
 
