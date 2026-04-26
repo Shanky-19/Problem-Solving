@@ -12,42 +12,43 @@ class Solution {
         }
 
         public int compareTo(Pair p) {
-            return p.sum - this.sum;
+            return this.sum - p.sum;
         }
 
-        public String toString() {
+        public String toString(){
             return (sum + "->" + i + "->" + j);
         }
     }
 
-    public List<List<Integer>> kSmallestPairs(int[] nums1, 
-                                int[] nums2, int k) {
-        PriorityQueue<Pair> pq = new PriorityQueue<>();
+    public List<List<Integer>> kSmallestPairs(int[] nums1, int[] nums2, int k) {
         int n = nums1.length;
         int m = nums2.length;
-
-        for(int i=0;i<n;i++) {
-            for(int j=0;j<m;j++) {
-                int sum = nums1[i] + nums2[j];
-
-                if(pq.size() < k) {
-                    pq.add(new Pair (sum, i, j));
-                } else if(sum < pq.peek().sum) {
-                    pq.remove();
-                    pq.add(new Pair(sum, i, j));
-                } else {
-                    break;
-                }
-            }
-        }
-
+        PriorityQueue<Pair> minHeap = new PriorityQueue<>();
+        minHeap.add(new Pair(nums1[0]+ nums2[0],0,0));
         List<List<Integer>> ans = new ArrayList<>();
-        while(pq.size() > 0) {
+        Set<String> visited = new HashSet();
+        while (k-- > 0 && minHeap.size() > 0) {
+            Pair p = minHeap.remove();
+            int sum = p.sum;
+            int i = p.i;
+            int j = p.j;
+
             List<Integer> al = new ArrayList<>();
-            Pair p = pq.remove();
-            al.add(nums1[p.i]);
-            al.add(nums2[p.j]);
+            al.add(nums1[i]);
+            al.add(nums2[j]);
             ans.add(al);
+
+            //Push (i, j+1) if possible
+            if (j + 1 < m && !visited.contains(i + "->" +(j + 1))) {
+                minHeap.add(new Pair(nums1[i]+nums2[j+1], i, j+1));
+                visited.add(i + "->" + (j + 1));
+            }
+
+            //Push (i+1, j) if possible
+            if (i + 1 < n && !visited.contains((i+1)+ "->" +j)) {
+                minHeap.add(new Pair(nums1[i+1] + nums2[j], i + 1, j));
+                visited.add((i+1) + "->" + j);
+            }
         }
         return ans;
     }
