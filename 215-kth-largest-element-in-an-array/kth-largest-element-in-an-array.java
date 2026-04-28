@@ -43,10 +43,8 @@ class Solution {
     
     public int findKthLargest(int[] nums, int k) {
         int n = nums.length;
-        
         int L = 0;
         int R = n-1;
-        
         int pivot_idx = 0;
         
         //kth largest pivot element - nums[k-1] 
@@ -63,7 +61,6 @@ class Solution {
             } else {
                 L = pivot_idx + 1;
             }
-            
         }  
         return nums[pivot_idx];
     }
