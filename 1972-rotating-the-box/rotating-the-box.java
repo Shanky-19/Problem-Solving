@@ -3,7 +3,6 @@ class Solution {
         int rows = grid.length;
         int cols = grid[0].length;
         char[][] res = new char[cols][rows];
-        
         for (int r = 0; r < cols; r++)
             for (int c = 0; c < rows; c++)
                 res[r][c] = '.';
@@ -18,7 +17,6 @@ class Solution {
                     res[p--][rows - 1 - r] = '#';
             }
         }
-
         return res;
     }
 }
