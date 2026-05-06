@@ -1,63 +1,97 @@
+//T.C : O(nlogn+log(side)⋅n⋅klogn)
+//S.C : O(n)
 class Solution {
-    public int maxDistance(int side, int[][] points, int k) {
-        long[] res = new long[points.length];
-        long lSide = (long) side;
 
-        for (int i = 0; i < points.length; i++) {
-            long x = points[i][0];
-            long y = points[i][1];
-            if (x == 0) res[i] = y;
-            else if (y == lSide) 
-                res[i] = lSide + x;
-            else if (x == lSide) 
-                res[i] = lSide * 3 - y;
-            else res[i] = lSide * 4 - x;
-        }
-        Arrays.sort(res);
+    long get1D(int side, int x, int y) {
+        if (y == 0) return x;
 
-        int left = 1;
-        int right = (int) ((lSide * 4) / k) + 1;
-        
-        while (left + 1 < right) {
-            int mid = left + (right - left) / 2;
-            if (check(mid, res, lSide, k)) 
-                left = mid;
-            else right = mid;
-        }
-        return left;
+        if (x == side) return (long) side + y;
+
+        if (y == side) return 3L * side - x;
+
+        return 4L * side - y;
     }
 
-    private boolean check(int n, long[] res, long lSide, int k) {
-        int m = res.length;
-        int[] idx = new int[k];
-        long perimeter = lSide * 4;
-        
-        idx[0] = 0;
-        long curr = res[0];
-        for (int i = 1; i < k; i++) {
-            int pos = Arrays.binarySearch(res, curr + n);
-            if (pos < 0) 
-                pos = -(pos + 1);
-            if (pos == m) 
-                return false;
-            idx[i] = pos;
-            curr = res[pos];
-        }
-        
-        if (res[idx[k - 1]] - res[0] <= perimeter - n) 
-            return true;
+    boolean check(long[] doubled, int n, int k, int side, int mid) {
+        long perimeter = 4L * side;
 
-        for (idx[0] = 1; idx[0] < idx[1]; idx[0]++) {
-            for (int j = 1; j < k; j++) {
-                while (idx[j] < m && res[idx[j]] < res[idx[j - 1]] + n) {
-                    idx[j]++;
-                }
-                if (idx[j] == m) 
-                    return false;
+        for (int i = 0; i < n; i++) {   // O(n)
+            int count = 1;
+            int idx = i;
+
+            long lastPos = doubled[idx];
+
+            for (int j = 2; j <= k; j++) {   // O(k log n)
+                long target = lastPos + mid;
+
+                int nextIdx = lowerBound(doubled, idx + 1, i + n, target);
+
+                if (nextIdx == i + n) break;
+
+                idx = nextIdx;
+                lastPos = doubled[idx];
+                count++;
             }
-            if (res[idx[k - 1]] - res[idx[0]] <= perimeter - n) 
+
+            if (count == k && (doubled[i] + perimeter - lastPos >= mid)) {
                 return true;
+            }
         }
+
         return false;
+    }
+
+    // Custom lower_bound (first index >= target)
+    int lowerBound(long[] arr, int left, int right, long target) {
+        int ans = right;
+
+        while (left < right) {
+            int mid = left + (right - left) / 2;
+
+            if (arr[mid] >= target) {
+                ans = mid;
+                right = mid;
+            } else {
+                left = mid + 1;
+            }
+        }
+
+        return ans;
+    }
+
+    public int maxDistance(int side, int[][] points, int k) {
+        int n = points.length;
+        long perimeter = 4L * side;
+
+        long[] positions = new long[n];
+
+        for (int i = 0; i < n; i++) {
+            positions[i] = get1D(side, points[i][0], points[i][1]);
+        }
+
+        Arrays.sort(positions);
+
+        // double array
+        long[] doubled = new long[2 * n];
+        for (int i = 0; i < n; i++) {
+            doubled[i] = positions[i];
+            doubled[i + n] = positions[i] + perimeter;
+        }
+
+        int left = 0, right = 2 * side;
+        int result = 0;
+
+        while (left <= right) {   // O(log side)
+            int mid = left + (right - left) / 2;
+
+            if (check(doubled, n, k, side, mid)) {
+                result = mid;
+                left = mid + 1;
+            } else {
+                right = mid - 1;
+            }
+        }
+
+        return result;
     }
 }
