@@ -46,10 +46,6 @@ class Solution {
                 idx += 2;
             }
         }
-        // for(char ch : ans) {
-        //     System.out.print(ch);
-        // }
-        // System.out.println();
         return String.valueOf(ans);
     }
 }
