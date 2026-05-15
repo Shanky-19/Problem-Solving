@@ -31,30 +31,25 @@ class Solution {
         }
 
         // Build the result.
-        StringBuilder sb = new StringBuilder();
-        while(pq.size() >= 2) {
+        char[] ans = new char[n];
+        int idx = 0;
+        while(pq.size() > 0) {
             Pair first  = pq.remove();
-            Pair second = pq.remove();
-            
-            sb.append(first.ch);
-            sb.append(second.ch);
-            
-            first.freq--;
-            second.freq--;
-            
-            if(first.freq > 0)
-                pq.add(first);
-            
-            if(second.freq > 0)
-                pq.add(second);
-        }
+            char ch = first.ch;
+            int freq = first.freq;
 
-        if(!pq.isEmpty()) {
-            Pair first = pq.remove();
-            
-            sb.append(first.ch);
+            while(freq-- > 0) {
+                if(idx >= n) {
+                    idx = 1;
+                }
+                ans[idx] = ch;
+                idx += 2;
+            }
         }
-        
-        return sb.toString();
+        // for(char ch : ans) {
+        //     System.out.print(ch);
+        // }
+        // System.out.println();
+        return String.valueOf(ans);
     }
 }
