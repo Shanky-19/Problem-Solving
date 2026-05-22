@@ -5,7 +5,8 @@ class Solution {
     public double mincostToHireWorkers(int[] quality, int[] min_wage, int k) {
         int n = quality.length;
 
-        // Calculate the wage-to-quality ratio for each worker and store in a pair
+        // Calculate the wage-to-quality ratio 
+        // for each worker and store in a pair
         double[][] worker_ratio = new double[n][2];
         for (int worker = 0; worker < n; worker++) {
             worker_ratio[worker][0] = 
