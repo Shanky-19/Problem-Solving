@@ -1,25 +1,44 @@
+//Simple approach using heap
+//T.C : O(nlogn)
+//S.C : O(n)
+class P {
+    public char c;
+    public int i;
+    public P(char c, int i) {
+        this.c = c;
+        this.i = i;
+    }
+}
+
 class Solution {
     public String clearStars(String s) {
-        char[] arr = s.toCharArray();
-        List<Integer>[] pos = new ArrayList[26];
-        for (int i = 0; i < 26; i++) pos[i] = new ArrayList<>();
-        PriorityQueue<Character> pq = new PriorityQueue<>();
-        for (int i = 0; i < arr.length; i++) {
-            char c = arr[i];
-            if (c == '*') {
-                char small = pq.peek();
-                List<Integer> lst = pos[small - 'a'];
-                int j = lst.remove(lst.size() - 1);
-                arr[j] = '*';
-                if (lst.isEmpty()) pq.poll();
-            } else {
-                int ci = c - 'a';
-                if (pos[ci].isEmpty()) pq.add(c);
-                pos[ci].add(i);
+        char[] str = s.toCharArray();
+        Queue<P> pq = new PriorityQueue<>((a, b) -> {
+           if (a.c == b.c) {
+               return b.i - a.i;
+           }
+            return Character.compare(a.c, b.c);
+        });
+        
+        for (int i = 0; i < str.length; i++) {
+            char c = str[i];
+            if (c != '*') {
+                pq.add(new P(c, i));
+                continue;
+            }
+            
+            if (!pq.isEmpty()) {
+                P p = pq.poll();
+                str[p.i] = '*';
             }
         }
-        StringBuilder res = new StringBuilder();
-        for (char c : arr) if (c != '*') res.append(c);
-        return res.toString();
+        char[] result = new char[str.length]; 
+        int index = 0;
+        for (char c : str) {
+            if (c != '*') {
+                result[index++] = c;
+            }
+        }
+        return new String(result, 0, index); 
     }
 }
