@@ -13,7 +13,7 @@ class Solution {
             int val = pq.remove();
 
             ans += val;
-            pq.add((int)Math.ceil((val*1.0)/3));
+            pq.add((int)Math.ceil((val)/3.0));
         }
 
         return ans;
