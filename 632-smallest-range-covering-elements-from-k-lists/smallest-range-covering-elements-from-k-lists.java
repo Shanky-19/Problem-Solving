@@ -31,13 +31,17 @@ class Solution {
                 resultRange[1] = maxEl;
             }
             
-            // Try to move to the next element in the list that contained the minimum element
+            // Try to move to the next element in the list that 
+            // contained the minimum element
             if (idx + 1 < nums.get(listIdx).size()) {
                 int nextElement = nums.get(listIdx).get(idx + 1);
                 pq.offer(new int[]{nextElement, listIdx, idx + 1});
-                maxEl = Math.max(maxEl, nextElement);  // Update maxEl with the new element
+                // Update maxEl with the new element
+                maxEl = Math.max(maxEl, nextElement);
             } else {
-                break;  // If one list is exhausted, we can't continue forming valid ranges
+                // If one list is exhausted, 
+                // we can't continue forming valid ranges
+                break;
             }
         }
         
