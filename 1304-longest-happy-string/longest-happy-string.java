@@ -35,25 +35,21 @@ class Solution {
         int count = 0;
         StringBuilder sb = new StringBuilder();
         while (pq.size() > 0) {
-            // System.out.println(pq);
             Pair p = pq.remove();
             char ch = p.ch;
             int freq = p.freq;
 
             if(prev == ch && count == 2) {
                 if(pq.size() > 0) {
-                    // System.out.println("2nd : " + pq);
                     Pair pair = pq.remove();
                     char newCh = pair.ch;
                     int newFreq = pair.freq;
-                    // System.out.println("2.1 nd : " + pq);
                     sb.append(newCh);
                     prev = newCh;
                     count = 1;
 
                     newFreq--;
                     if(newFreq > 0) {
-                        // System.out.println("3rd : " + newFreq);
                         pq.add(new Pair(newCh, newFreq));
                     }
                     pq.add(p);
