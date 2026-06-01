@@ -61,7 +61,6 @@ class Solution {
                 count++;
                 sb.append(ch);
 
-                // freq--;
                 p.freq--;
                 if(p.freq > 0) {
                     pq.add(p);
@@ -77,6 +76,7 @@ class Solution {
             }
 
         }
+        
         return sb.toString();
     }
 }
