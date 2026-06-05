@@ -24,6 +24,7 @@ class Solution {
             boundaryCells.offer(new int[]{heightMap[m - 1][col], m - 1, col});
             visited[m - 1][col] = true;
         }
+        
         int water = 0;
         // Directions for moving to neighbors (left, right, up, down)
         int[][] directions = {{0, -1}, {0, 1}, {-1, 0}, {1, 0}};
