@@ -13,7 +13,7 @@ class Solution {
 
         long[] result = new long[n];
         PriorityQueue<Integer> pq = new PriorityQueue<>();
-        long sum = 0;
+        long sum = 0; // sum of elements which are before index i
         for (int i = 0; i < n; i++) { //O(nlogk)
             if (i > 0 && vec[i - 1][0] == vec[i][0]) {
                 // edge case : no numbers are lesser than current
