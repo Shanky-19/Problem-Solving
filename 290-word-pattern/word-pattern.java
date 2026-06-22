@@ -4,8 +4,10 @@ class Solution {
         if(pattern.length() != arr.length){
             return false;
         }
+
         HashMap<Character,String> hm = new HashMap<>();
         HashSet<String> set = new HashSet<>();
+        
         for(int i=0;i<pattern.length();i++){
             char ch = pattern.charAt(i);
             if(hm.containsKey(ch)){
