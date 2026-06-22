@@ -1,4 +1,5 @@
 class Solution {
+    
     class Pair {
         int win;
         int loss;
@@ -7,6 +8,7 @@ class Solution {
             this.loss = loss;
         }
     }
+
     public List<List<Integer>> findWinners(int[][] matches) {
         int n = matches.length;
         HashMap<Integer, Pair> hm = new HashMap<>();
@@ -45,7 +47,7 @@ class Solution {
 
         Collections.sort(allWins);
         Collections.sort(oneLose);
-        
+
         ans.add(allWins);
         ans.add(oneLose);
         return ans;
