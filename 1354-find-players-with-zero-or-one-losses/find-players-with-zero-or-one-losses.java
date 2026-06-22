@@ -21,17 +21,15 @@ class Solution {
                 p.win += 1;
                 hm.put(winner, p);
             }
+
             if(!hm.containsKey(loser)) {
-
                 hm.put(loser, new Pair(0, 1));
-
             } else {
-
                 Pair p = hm.get(loser);
                 p.loss += 1;
                 hm.put(loser, p);
-                
             }
+            
         }
         List<List<Integer>> ans = new ArrayList<>();
         List<Integer> allWins = new ArrayList<>();
