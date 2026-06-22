@@ -29,7 +29,7 @@ class Solution {
                 p.loss += 1;
                 hm.put(loser, p);
             }
-            
+
         }
         List<List<Integer>> ans = new ArrayList<>();
         List<Integer> allWins = new ArrayList<>();
@@ -42,8 +42,10 @@ class Solution {
                 oneLose.add(key);
             }
         }
+
         Collections.sort(allWins);
         Collections.sort(oneLose);
+        
         ans.add(allWins);
         ans.add(oneLose);
         return ans;
