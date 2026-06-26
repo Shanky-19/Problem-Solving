@@ -9,8 +9,16 @@ public class Solution {
             int x = edge[0];
             int y = edge[1];
 
-            adj.computeIfAbsent(x, k -> new ArrayList<>()).add(y);
-            adj.computeIfAbsent(y, k -> new ArrayList<>()).add(x);
+            if(!adj.containsKey(x)) {
+                adj.put(x, new ArrayList<>());
+            }
+            adj.get(x).add(y);
+
+
+            if(!adj.containsKey(y)) {
+                adj.put(y, new ArrayList<>());
+            }
+            adj.get(y).add(x);
         }
 
         int root = 0;
