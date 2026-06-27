@@ -19,7 +19,6 @@ class Solution {
                 hm.put(ch, currPush);
                 pushes += hm.get(ch);
             }
-            System.out.println(ch + " " + hm.get(ch));
        }
        return pushes;
 
