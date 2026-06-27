@@ -1,31 +1,15 @@
 class Solution {
-
-    class Pair implements Comparable<Pair>{ 
-        char ch;
-        int freq;
-
-        public Pair (char ch, int freq) {
-            this.ch = ch;
-            this.freq = freq;
-        }
-        public int compareTo(Pair p) {
-            return p.freq - this.freq;
-        }
-
-        public String toString() {
-            return (this.ch + "->" + this.freq);
-        }
-    }
-
     public int minimumPushes(String word) {
         Map<Character, Integer> hm = new HashMap<>();
         for(char ch : word.toCharArray()) {
             hm.put(ch, hm.getOrDefault(ch, 0)+1);
         }
 
-        PriorityQueue<Pair> pq = new PriorityQueue<>();
+        PriorityQueue<Integer> pq = new PriorityQueue<>(
+                        Collections.reverseOrder());
+
         for(char ch : hm.keySet()) {
-            pq.add(new Pair(ch, hm.get(ch)));
+            pq.add(hm.get(ch));
         }
         // System.out.println(pq);
 
@@ -37,8 +21,8 @@ class Solution {
                 currButton = 2;
                 currPush++;
             }
-            Pair p = pq.remove();
-            pushes += (currPush * p.freq);
+            int freq = pq.remove();
+            pushes += (currPush * freq);
             currButton++;
         }
         return pushes;
