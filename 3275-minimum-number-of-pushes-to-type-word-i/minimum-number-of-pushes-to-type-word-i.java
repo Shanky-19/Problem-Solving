@@ -10,12 +10,9 @@ class Solution {
             // } else {
                 if(currButton == 10) {
                     currButton = 2;
-                    currButton++;
                     currPush++;
-                } else {
-                    currButton++;
                 }
-                
+                currButton++;
                 hm.put(ch, currPush);
                 pushes += hm.get(ch);
             // }
