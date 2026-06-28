@@ -8,7 +8,6 @@ class Solution {
         // color and count of balls having this color
         Map<Integer, Integer> colors = new HashMap<>();
 
-
         int currDistinctColorsCount = 0;
         for(int i=0;i<n;i++) {
             int[] q = queries[i];
