@@ -8,8 +8,6 @@ class Solution {
         while (j < n) {
             char ch = s.charAt(j);
             fmap[ch-'a']++;
-
-            
             while (i< n && containsAll(fmap)) {
                 ans += (n-j);
                 char front = s.charAt(i);
