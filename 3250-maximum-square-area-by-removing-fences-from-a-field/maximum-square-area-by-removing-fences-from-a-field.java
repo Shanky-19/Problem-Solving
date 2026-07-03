@@ -6,6 +6,7 @@ class Solution {
         h[hFences.length] = 1;
         h[hFences.length + 1] = m;
         
+
         int[] v = Arrays.copyOf(vFences, vFences.length + 2);
         v[vFences.length] = 1;
         v[vFences.length + 1] = n;
@@ -33,7 +34,9 @@ class Solution {
             }
         }
 
-        if (maxSide == -1) return -1;
+        if (maxSide == -1) {
+            return -1;
+        }
 
         // 5. Return result modulo 10^9 + 7
         long MOD = 1_000_000_007;
