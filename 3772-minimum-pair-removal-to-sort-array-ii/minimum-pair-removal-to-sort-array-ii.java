@@ -1,84 +1,119 @@
+import java.util.*;
+
 class Solution {
+
+    static class Pair {
+        long sum;
+        int left;
+        int right;
+
+        Pair(long sum, int left, int right) {
+            this.sum = sum;
+            this.left = left;
+            this.right = right;
+        }
+    }
+
     public int minimumPairRemoval(int[] nums) {
         int n = nums.length;
+
         if (n <= 1) return 0;
 
         long[] arr = new long[n];
-        for (int i = 0; i < n; ++i) arr[i] = nums[i];
-        boolean[] removed = new boolean[n];
-
-        PriorityQueue<P> pq = new PriorityQueue<>(new Comparator<P>() {
-            public int compare(P a, P b) {
-                if (a.sum < b.sum) return -1;
-                if (a.sum > b.sum) return 1;
-                return Integer.compare(a.idx, b.idx);
-            }
-        });
-
-        int sorted = 0;
-        for (int i = 1; i < n; ++i) {
-            pq.add(new P(arr[i - 1] + arr[i], i - 1));
-            if (arr[i] >= arr[i - 1]) sorted++;
+        for (int i = 0; i < n; i++) {
+            arr[i] = nums[i];
         }
-        if (sorted == n - 1) return 0;
 
-        int rem = n;
         int[] prev = new int[n];
         int[] next = new int[n];
-        for (int i = 0; i < n; ++i) {
+        boolean[] alive = new boolean[n];
+
+        for (int i = 0; i < n; i++) {
             prev[i] = i - 1;
             next[i] = i + 1;
+            alive[i] = true;
         }
 
-        while (rem > 1) {
-            P top = pq.poll();
-            if (top == null) break;
-            long sum = top.sum;
-            int left = top.idx;
-            int right = next[left];
-            if (right >= n || removed[left] || removed[right] || arr[left] + arr[right] != sum)
+        PriorityQueue<Pair> pq = new PriorityQueue<>((a, b) -> {
+            if (a.sum != b.sum) return Long.compare(a.sum, b.sum);
+            return Integer.compare(a.left, b.left);
+        });
+
+        int badPairs = 0;
+
+        for (int i = 0; i < n - 1; i++) {
+            if (arr[i] > arr[i + 1]) {
+                badPairs++;
+            }
+
+            pq.add(new Pair(arr[i] + arr[i + 1], i, i + 1));
+        }
+
+        int operations = 0;
+
+        while (badPairs > 0) {
+            Pair curr = pq.poll();
+
+            int left = curr.left;
+            int right = curr.right;
+
+            // Skip invalid pair
+            if (!alive[left] || !alive[right] || next[left] != right) {
                 continue;
+            }
 
-            int pre = prev[left];
-            int nxt = next[right];
+            // Important: skip stale pair with old sum
+            if (curr.sum != arr[left] + arr[right]) {
+                continue;
+            }
 
-            if (arr[left] <= arr[right]) sorted--;
-            if (pre != -1 && arr[pre] <= arr[left]) sorted--;
-            if (nxt != n && arr[right] <= arr[nxt]) sorted--;
+            int leftPrev = prev[left];
+            int rightNext = next[right];
 
+            // Remove old bad pair contribution
+            if (leftPrev >= 0 && arr[leftPrev] > arr[left]) {
+                badPairs--;
+            }
+
+            if (arr[left] > arr[right]) {
+                badPairs--;
+            }
+
+            if (rightNext < n && arr[right] > arr[rightNext]) {
+                badPairs--;
+            }
+
+            // Merge right into left
             arr[left] += arr[right];
-            removed[right] = true;
-            rem--;
+            alive[right] = false;
 
-            if (pre != -1) {
-                pq.add(new P(arr[pre] + arr[left], pre));
-                if (arr[pre] <= arr[left]) sorted++;
-            } else {
-                prev[left] = -1;
+            next[left] = rightNext;
+
+            if (rightNext < n) {
+                prev[rightNext] = left;
             }
 
-            if (nxt != n) {
-                prev[nxt] = left;
-                next[left] = nxt;
-                pq.add(new P(arr[left] + arr[nxt], left));
-                if (arr[left] <= arr[nxt]) sorted++;
-            } else {
-                next[left] = n;
+            // Add new bad pair contribution
+            if (leftPrev >= 0 && arr[leftPrev] > arr[left]) {
+                badPairs++;
             }
 
-            if (sorted == rem - 1)
-                return n - rem;
-        }
-        return n;
-    }
+            if (rightNext < n && arr[left] > arr[rightNext]) {
+                badPairs++;
+            }
 
-        private static class P {
-        long sum;
-        int idx;
-        P(long s, int i) {
-            sum = s;
-            idx = i;
-        }
-    }
+            // Add newly formed adjacent pairs
+            if (leftPrev >= 0) {
+                pq.add(new Pair(arr[leftPrev] + arr[left], leftPrev, left));
+            }
 
+            if (rightNext < n) {
+                pq.add(new Pair(arr[left] + arr[rightNext], left, rightNext));
+            }
+
+            operations++;
+        }
+
+        return operations;
+    }
 }
