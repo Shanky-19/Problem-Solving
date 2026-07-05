@@ -22,7 +22,8 @@ class Solution {
                     if(nums[i] == nums[j]) {
                         for(int k=j+1;k<n;k++) {
                             if(nums[j] == nums[k]) {
-                                int potentialAns = (Math.abs(i-j) + Math.abs(j-k) + Math.abs(i-k));
+                                int potentialAns = (Math.abs(i-j) 
+                                                + Math.abs(j-k) + Math.abs(i-k));
                                 ans = Math.min(ans, potentialAns); 
                             }
                         }
