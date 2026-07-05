@@ -1,6 +1,4 @@
 class Solution {
-
-
     class Pair implements Comparable<Pair> {
         int val;
         int idx;
