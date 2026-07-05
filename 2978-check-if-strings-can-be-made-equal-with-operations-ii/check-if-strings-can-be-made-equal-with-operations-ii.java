@@ -1,21 +1,37 @@
 class Solution {
     public boolean checkStrings(String s1, String s2) {
-        long eX = 0, oX = 0, eS = 0, oS = 0;
+        int n = s1.length();
+        int[] fmap = new int[26];
+        // even indices
+        for(int i=0;i<n;i+=2) {
+            int idx1 = s1.charAt(i)-'a';
+            fmap[idx1]++;
+            int idx2 = s2.charAt(i)-'a';
+            fmap[idx2]--;
+        }
 
-        for (int i = 0; i < s1.length(); i++) {
-            int v1 = s1.charAt(i), v2 = s2.charAt(i);
-            int dx = v1 ^ v2;
-            int ds = v1 * v1 - v2 * v2;
-
-            if ((i & 1) == 1) {
-                oX ^= dx;
-                oS += ds;
-            } else {
-                eX ^= dx;
-                eS += ds;
+        // check 
+        for(int i=0;i<26;i++) {
+            if(fmap[i] != 0) {
+                return false;
             }
         }
 
-        return (eX | oX | eS | oS) == 0;
+        fmap = new int[26];
+        // odd indices
+        for(int i=1;i<n;i+=2) {
+            int idx1 = s1.charAt(i)-'a';
+            fmap[idx1]++;
+            int idx2 = s2.charAt(i)-'a';
+            fmap[idx2]--;
+        }
+
+        // check 
+        for(int i=0;i<26;i++) {
+            if(fmap[i] != 0) {
+                return false;
+            }
+        }
+        return true;
     }
 }
