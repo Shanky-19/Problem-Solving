@@ -7,9 +7,11 @@ class Solution {
             if (seen.containsKey(n))
                 res = Math.min(res, i - seen.get(n));
 
-            for (r = 0; n > 0; n /= 10)
+            for (r = 0; n > 0; n /= 10) {
+
                 r = r * 10 + (n % 10);
 
+            }
             seen.put(r, i++);
         }
         return res == 100000 ? -1 : res;
