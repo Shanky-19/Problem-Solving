@@ -8,11 +8,6 @@ class Solution {
             return b[1]-a[1];
         });
 
-        // for(int i=0;i<n;i++) {
-        //     System.out.print(intervals[i][0] + " " + intervals[i][1]);
-        //     System.out.println();
-        // }
-
         int minSoFar = intervals[0][0];
         int maxSoFar = intervals[0][1];
         int covered = 0;
