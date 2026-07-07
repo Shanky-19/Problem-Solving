@@ -1,60 +1,39 @@
+//Approach(Track last occurrence of lowercase and first occurrence of uppercase)
+//T.C : O(n)
+//S.C : O(1) - fixed-size arrays of length 26
 class Solution {
-
-    private boolean isUpperCase(char ch) {
-        return (ch >= 'A' && ch <= 'Z');
-    }
-
     public int numberOfSpecialChars(String word) {
-        int n = word.length();
-        Map<Character, List<Integer>> hm = new HashMap<>();
-        for(int i=0;i<n;i++) {
+        
+        int[] lastSmall = new int[26];
+        int[] firstCapital = new int[26];
+
+        java.util.Arrays.fill(lastSmall, -1);
+        java.util.Arrays.fill(firstCapital, -1);
+
+        for(int i = 0; i < word.length(); i++) {
+            
             char ch = word.charAt(i);
-            if(isUpperCase(ch)) {
-                continue;
-            } else {
-                if(hm.containsKey(ch)) {
-                    List<Integer> indices = hm.get(ch);
-                    indices.add(i);
-                    hm.put(ch, indices);
-                } else {
-                    List<Integer> indices = new ArrayList<>();
-                    indices.add(i);
-                    hm.put(ch, indices);
+
+            if(Character.isLowerCase(ch)) {
+                lastSmall[ch - 'a'] = i;
+            }
+            else {
+                if(firstCapital[ch - 'A'] == -1) {
+                    firstCapital[ch - 'A'] = i;
                 }
             }
         }
 
-        // System.out.println(hm);
+        int count = 0;
 
-        Set<Character> unique = new HashSet<>();
-        for(int i=0;i<n;i++) {
-            char ch = word.charAt(i);
-            if(isUpperCase(ch)) {
-                char lowerCase = (char) (ch + 32);
-                if(hm.containsKey(lowerCase)) {
-                    List<Integer> indices = hm.get(lowerCase);
-                    int len = indices.size();
-                    // System.out.println(hm);
-                    // System.out.println(indices);
-                    // System.out.println(ch + " " + i); 
-                    // System.out.println(indices.get(len-1) + " " + i);
-                    if(indices.get(len - 1) < i) {
-                        indices.remove(len-1);
-                        if(indices.size() == 0) {
-                            hm.remove(lowerCase);
-                        } else {
-                            hm.put(lowerCase, indices);
-                        }
-                        
-                        // System.out.println(hm);
-                        unique.add(ch);
-                    } else {
-                        hm.remove(lowerCase);
-                    }
+        for(int i = 0; i < 26; i++) {
 
-                }
-            } 
+            if(lastSmall[i] != -1 && firstCapital[i] != -1 &&
+               lastSmall[i] < firstCapital[i]) {
+                count++;
+            }
         }
-        return unique.size();
+
+        return count;
     }
 }
