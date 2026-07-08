@@ -12,7 +12,8 @@ class Solution {
             // will be different
 
             // so common prefi = 2*(i+1) - set.size();
-
+            // also numbers are not repeated otherwise
+            // we would need hashmap to track freq
             ans[i] = 2*(i+1) - set.size();
         }
         return ans;
