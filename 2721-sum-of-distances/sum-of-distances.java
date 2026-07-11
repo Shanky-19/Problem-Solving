@@ -1,34 +1,39 @@
+//Approach (Using prefix sum and map)
+//T.C : O(n)
+//S.C : O(n)
 class Solution {
     public long[] distance(int[] nums) {
         int n = nums.length;
-        long[] ans = new long[n];
+        long[] arr = new long[n];
 
-        Map<Integer, List<Integer>> mp = new HashMap<>();
+        Map<Integer, Long> indexSum = new HashMap<>();
+        Map<Integer, Long> indexCount = new HashMap<>();
 
+        // Left to Right
         for (int i = 0; i < n; i++) {
-            mp.computeIfAbsent(nums[i], k -> new ArrayList<>()).add(i);
+            long freq = indexCount.getOrDefault(nums[i], 0L);
+            long sum  = indexSum.getOrDefault(nums[i], 0L);
+
+            arr[i] += freq * i - sum;
+
+            indexCount.put(nums[i], freq + 1);
+            indexSum.put(nums[i], sum + i);
         }
 
-        for (List<Integer> pos : mp.values()) {
+        indexSum.clear();
+        indexCount.clear();
 
-            long sum = 0;
-            for (int x : pos) sum += x;
+        // Right to Left
+        for (int i = n - 1; i >= 0; i--) {
+            long freq = indexCount.getOrDefault(nums[i], 0L);
+            long sum  = indexSum.getOrDefault(nums[i], 0L);
 
-            long leftSum = 0;
-            int m = pos.size();
+            arr[i] += sum - freq * i;
 
-            for (int i = 0; i < m; i++) {
-                long rightSum = sum - leftSum - pos.get(i);
-
-                long left  = (long) pos.get(i) * i - leftSum;
-                long right = rightSum - (long) pos.get(i) * (m - i - 1);
-
-                ans[pos.get(i)] = left + right;
-
-                leftSum += pos.get(i);
-            }
+            indexCount.put(nums[i], freq + 1);
+            indexSum.put(nums[i], sum + i);
         }
 
-        return ans;
+        return arr;
     }
 }
