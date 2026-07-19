@@ -17,7 +17,8 @@ class Solution {
             }
             while(!stack.isEmpty() && stack.peek()>cur
                     && lastIndexOfChar[stack.peek()-'a'] > i){
-                visited[stack.pop()-'a']=false;
+                
+                visited[stack.pop()-'a'] = false;
             }
             stack.push(cur);
             visited[cur-'a']=true;
@@ -28,7 +29,7 @@ class Solution {
         for(char c:stack) {
             ans.append(c);
         }
-        
+
         return ans.toString();
     }
 }
