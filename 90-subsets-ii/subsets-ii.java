@@ -1,6 +1,7 @@
 class Solution {
 
-    public void helper(int[] nums,int idx,List<Integer> al,Set<List<Integer>> set){
+    public void helper(int[] nums,int idx,List<Integer> al,
+                            Set<List<Integer>> set){
 
         if(idx == nums.length){
             set.add(new ArrayList<>(al));
