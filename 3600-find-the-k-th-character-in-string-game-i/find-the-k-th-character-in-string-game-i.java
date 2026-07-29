@@ -2,7 +2,6 @@ class Solution {
     public char kthCharacter(int k) {
         StringBuilder sb = new StringBuilder();
         sb.append("a");
-
         while(sb.length() < k) {
             int n = sb.length();
             StringBuilder sb2 = new StringBuilder();
