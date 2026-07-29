@@ -6,7 +6,8 @@ class Solution {
         int countNum = 0;
 
         while (curr <= n) {
-            countNum += Math.min(next, (long) n + 1) - curr;
+            //next should not be more than n+1; -> curr can be at-max n
+            countNum += Math.min(next, (long) n + 1) - curr; 
             curr *= 10;
             next *= 10;
         }
