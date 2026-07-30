@@ -60,6 +60,6 @@ class Solution {
         }
 
         // Apply total shift from 'a'
-        return (char) ((('a' - 'a' + shift) % 26) + 'a');
+        return (char) ((shift % 26) + 'a');
     }
 }
