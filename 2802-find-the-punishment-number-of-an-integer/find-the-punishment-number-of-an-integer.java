@@ -1,5 +1,5 @@
 class Solution {
-    private boolean check(int idx, int currentSum, String sq, int num) {
+    private boolean check(int idx, int currentSum, String sq, int num, int[][] dp) {
         if(idx == sq.length()) {
             return currentSum == num;
         }
@@ -9,6 +9,9 @@ class Solution {
             return false;
         }
 
+        if(dp[idx][currentSum] != -1) {
+            return dp[idx][currentSum]==1;
+        }
 
         int n = sq.length();
         boolean ans = false;
@@ -16,11 +19,13 @@ class Solution {
             String substr = sq.substring(idx, j+1);
             int val = Integer.parseInt(substr);
 
-            ans = ans || check(j+1, currentSum+val, sq, num);
+            ans = ans || check(j+1, currentSum+val, sq, num, dp);
             if(ans) {
+                dp[idx][currentSum] = 1;
                 return true;
             }
         }
+        dp[idx][currentSum] = 0;
         return false;
     }
 
@@ -31,7 +36,14 @@ class Solution {
             String sq = "" + (i*i);
             int idx = 0;
             int currentSum = 0;
-            if(check(idx, currentSum, sq, i)) {
+
+            int[][] dp = new int[sq.length()][i+1];
+            for(int[] arr : dp) {
+                Arrays.fill(arr, -1);
+            }
+
+
+            if(check(idx, currentSum, sq, i, dp)) {
                 ans += sqVal;
             }
         }
