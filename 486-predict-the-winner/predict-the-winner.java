@@ -9,9 +9,17 @@ class Solution {
             return dp[l][r];
         }
 
-        int leftChose = nums[l] + Math.min(solve(l+2, r, nums, dp), solve(l+1, r-1, nums, dp));
+        int leftChose = nums[l] 
+                        + Math.min(
+                                solve(l+2, r, nums, dp), 
+                                solve(l+1, r-1, nums, dp)
+                            );
 
-        int rightChose = nums[r] + Math.min(solve(l, r-2, nums, dp), solve(l+1, r-1, nums, dp));
+        int rightChose = nums[r] 
+                        + Math.min(
+                            solve(l, r-2, nums, dp), 
+                            solve(l+1, r-1, nums, dp)
+                        );
 
         return dp[l][r] = Math.max(leftChose, rightChose);
     }
@@ -34,7 +42,7 @@ class Solution {
         for(int[] arr : dp) {
             Arrays.fill(arr, -1);
         }
-        
+
         int player1Score = solve(l, r, nums, dp);
         int player2Score = total - player1Score;
 
