@@ -4,10 +4,10 @@ class Solution {
 
         int nonZero = 0; 
         int xor = 0; 
-        
-        for(int x: nums) {
-            xor ^= x; 
-            if(x != 0) {
+
+        for(int val: nums) {
+            xor ^= val; 
+            if(val != 0) {
                 nonZero++;
             }
         }
