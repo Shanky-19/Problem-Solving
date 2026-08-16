@@ -21,19 +21,19 @@ class Solution {
             return;
         }
 
-        Set<String> set = new HashSet<>();
+        // Set<String> set = new HashSet<>();
 
         for(int i= idx;i<str.length();i++) {
             String substr = str.substring(idx, i+1);
-            if(set.contains(substr)) {
-                continue;
-            }
+            // if(set.contains(substr)) {
+            //     continue;
+            // }
 
             // System.out.println(substr);
 
             if(isPalindrome(substr)) {
                 // System.out.println("hi");
-                set.add(substr);
+                // set.add(substr);
                 al.add(substr);
                 solve(i+1, str, al, ans);
                 al.remove(al.size()-1);
