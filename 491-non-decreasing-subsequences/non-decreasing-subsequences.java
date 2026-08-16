@@ -1,37 +1,36 @@
 class Solution {
 
     private void solve (int idx, int[] nums,
-                        List<Integer> al, Set<List<Integer>> ans) {
+                        List<Integer> al, List<List<Integer>> ans) {
         
-        if(idx == nums.length) {
-            if(al.size() >= 2) {
-                ans.add(new ArrayList<>(al));
+        if(al.size() >= 2) {
+            ans.add(new ArrayList<>(al));
+        }
+
+        Set<Integer> set = new HashSet<>();
+
+        for(int i = idx;i<nums.length;i++) {
+            if(set.contains(nums[i])) {
+                continue;
             }
-            return;
+
+            if (al.size() == 0 || nums[i] >= al.get(al.size() - 1)) { 
+                set.add(nums[i]);
+
+                al.add(nums[i]);
+                solve(i+1, nums, al, ans);
+                al.remove(al.size() - 1);
+            }
         }
-
-        // pick 
-        if(al.size() == 0 || al.get(al.size()-1) <= nums[idx]) {
-            al.add(nums[idx]);
-            solve(idx+1, nums, al, ans);
-            al.remove(al.size() - 1);
-        }
-
-        // not pick
-        solve(idx+1, nums, al, ans);
-        
-
     }
 
     public List<List<Integer>> findSubsequences(int[] nums) {
-        int n = nums.length;
-        Set<List<Integer>> ans = new HashSet<>();
-
+        List<List<Integer>> ans = new ArrayList<>();
         List<Integer> al = new ArrayList<>();
         int idx = 0;
         solve(idx, nums, al, ans);
 
-        return new ArrayList<>(ans);
+        return ans;
         
     }
 }
