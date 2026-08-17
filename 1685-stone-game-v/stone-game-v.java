@@ -54,7 +54,6 @@ class Solution {
 
                     rightPtr[l]++;
                 }
-
                 int best = 0;
 
                 if (leftPtr[l] >= l) {
@@ -64,7 +63,6 @@ class Solution {
                 if (rightPtr[l] <= r - 1) {
                     best = Math.max(best, rightBest[rightPtr[l] + 1][r]);
                 }
-
                 dp[l][r] = best;
 
                 leftBest[l][r] = Math.max(
