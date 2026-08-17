@@ -1,31 +1,30 @@
 class Solution {
-    int result = Integer.MAX_VALUE;
-    public void helper(int idx, int[] cookies,int[] children, int k) {
+    int ans = Integer.MAX_VALUE;
+
+    private void solve(int idx, int[] cookies, int[] child, int k) {
         if(idx == cookies.length) {
-            
-            int ans = children[0];
-            for(int i=0;i<children.length;i++){
-                ans = Math.max(ans,children[i]);
+            int max = child[0];
+            for(int val : child) {
+                max = Math.max(max, val);
             }
-            result = Math.min(result, ans);
+            ans = Math.min(ans, max);
             return;
         }
-        
-        int candy = cookies[idx];
-        for(int i = 0; i<k; i++) {
-            children[i] += candy;
-            
-            helper(idx+1, cookies, children, k);
-            
-            // backtrack
-            children[i] -= candy;
+
+
+        int cks = cookies[idx];
+        for(int i=0;i<k;i++) {
+            child[i] += cks;
+            solve(idx+1, cookies, child, k);
+            child[i] -= cks;
         }
-        
+
     }
 
     public int distributeCookies(int[] cookies, int k) {
-        int[] childrens = new int[k];
-        helper(0,cookies,childrens,k);
-        return result;
+        int[] child = new int[k];
+        int idx = 0;
+        solve(idx, cookies, child, k);
+        return ans;
     }
 }
