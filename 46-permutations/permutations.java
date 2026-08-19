@@ -1,6 +1,6 @@
 class Solution {
 
-    public void backtrack(int idx,int[] nums,List<List<Integer>> ans,List<Integer> al,int n){
+    public void solve(int idx,int[] nums,List<List<Integer>> ans,List<Integer> al,int n){
         if(idx == n){
             if(al.size() == n){
                 ans.add(new ArrayList<>(al));
@@ -13,7 +13,7 @@ class Solution {
                 al.add(nums[i]);
                 int temp = nums[i];
                 nums[i] = -11;
-                backtrack(idx+1,nums,ans,al,n);
+                solve(idx+1,nums,ans,al,n);
                 nums[i] = temp;
                 al.remove(al.size()-1);
             }
@@ -26,7 +26,7 @@ class Solution {
         List<Integer> al = new ArrayList<>();
         int idx = 0;
         int n = nums.length;
-        backtrack(idx,nums,ans,al,n);
+        solve(idx,nums,ans,al,n);
         return ans;
     }
 }
