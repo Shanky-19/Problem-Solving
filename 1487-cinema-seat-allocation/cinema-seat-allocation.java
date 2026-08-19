@@ -11,6 +11,7 @@ class Solution {
             if(r[1] == 1 || r[1] == 10) {
                 continue;
             } 
+
             if(map.containsKey(r[0])) {
                 List<Integer> al = map.get(r[0]);
                 al.add(r[1]);
@@ -20,6 +21,7 @@ class Solution {
                 al.add(r[1]);
                 map.put(r[0], al);
             }
+            
         }
 
         int size = map.size(); // unique rows in map, 
