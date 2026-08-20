@@ -1,6 +1,7 @@
 class Solution {
 
-    public void solve(int idx,int[] nums,List<List<Integer>> ans,List<Integer> al,int n){
+    public void solve(int idx,int[] nums,List<List<Integer>> ans,
+                        List<Integer> al,int n){
         if(idx == n){
             if(al.size() == n){
                 ans.add(new ArrayList<>(al));
