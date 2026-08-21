@@ -18,14 +18,9 @@ class Solution {
                 map.remove(nums[idx]);
             }
 
-            // cannot pick
-            solve(idx+1, nums, k, map);
-
-        } else {
-            // cannot pick
-            solve(idx+1, nums, k, map);
         }
 
+        solve(idx+1, nums, k, map);
     }
 
     public int beautifulSubsets(int[] nums, int k) {
