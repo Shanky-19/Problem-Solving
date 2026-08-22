@@ -1,8 +1,10 @@
 class Solution {
 
-    public void helper(String s,Set<String> set,StringBuilder sb,List<String> ans){
+    public void helper(String s,Set<String> set,
+                        StringBuilder sb,List<String> ans){
         if(s.length() == 0){
-            sb.deleteCharAt(sb.length()-1); // to remove extra space which is added at last
+            // to remove extra space which is added at last
+            sb.deleteCharAt(sb.length()-1); 
             ans.add(sb.toString());
             return;
         }
@@ -12,7 +14,8 @@ class Solution {
             String prefix = s.substring(0,i+1);
             String remainingString = s.substring(i+1);
             if(set.contains(prefix)){
-            // as we cannot remove from sb the last prefix added we have to use temp for backtracking
+                // as we cannot remove from sb the 
+                // last prefix added we have to use temp for backtracking
                 StringBuilder temp = new StringBuilder(sb);
                 temp.append(prefix+" ");
                 helper(remainingString,set,temp,ans);
