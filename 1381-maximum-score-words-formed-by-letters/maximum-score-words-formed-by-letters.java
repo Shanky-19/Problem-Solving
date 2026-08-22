@@ -52,8 +52,6 @@ class Solution {
             reUpdateTheFreq(words[idx], freqMap);
         }
         
-
-
         //not pick
         solve(idx+1, words, freqMap, score, scoreSoFar);
 
