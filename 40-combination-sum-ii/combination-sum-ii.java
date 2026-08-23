@@ -24,7 +24,7 @@ class Solution {
     }
 
     public List<List<Integer>> combinationSum2(int[] candidates, int target) {
-        // with this we can avoid the condition like [1,7] and [7,1] -> added once
+    // with this we can avoid the condition like [1,7] and [7,1] -> added once
         Arrays.sort(candidates);
         int idx = 0;
         List<Integer> al = new ArrayList<>();
