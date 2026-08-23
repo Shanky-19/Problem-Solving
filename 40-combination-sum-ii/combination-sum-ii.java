@@ -1,6 +1,7 @@
 class Solution {
 
-    public void helper(int[] candidates, int target,int idx,List<Integer> al,List<List<Integer>> ans){
+    public void helper(int[] candidates, int target,int idx,
+                        List<Integer> al,List<List<Integer>> ans){
         if(target == 0){
             ans.add(new ArrayList<>(al));
             return;
@@ -23,7 +24,8 @@ class Solution {
     }
 
     public List<List<Integer>> combinationSum2(int[] candidates, int target) {
-        Arrays.sort(candidates);// with this we can avoid the condition like [1,7] and [7,1] -> added once
+        // with this we can avoid the condition like [1,7] and [7,1] -> added once
+        Arrays.sort(candidates);
         int idx = 0;
         List<Integer> al = new ArrayList<>();
         List<List<Integer>> ans = new ArrayList<>();
