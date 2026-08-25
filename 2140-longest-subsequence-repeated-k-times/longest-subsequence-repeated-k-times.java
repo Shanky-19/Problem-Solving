@@ -1,7 +1,7 @@
 class Solution {
     String result = "";
 
-    // Check if seq * k is a subsequence of s
+    // Checks if sub * k is a subsequence of s
     private boolean isSubsequence(String s, String sub, int k) {
         int i = 0;
         int j = 0;
@@ -15,62 +15,67 @@ class Solution {
             i++;
         }
 
-        return (j == k * len);
+        return j == k * len;
     }
 
-    private void solve(String s, StringBuilder curr, boolean[] canUse,
-                        int[] maxFreqInOneSubsequence,int k, int maxLen) {
-
-        if (curr.length() > maxLen) {
-            return;
+    // Tries to build a valid subsequence of exact length 'maxLen'
+    private boolean backtracking(String s, StringBuilder curr, boolean[] canUse, int[] requiredFreq, int k, int maxLen) {
+        if (curr.length() == maxLen) {
+            if (isSubsequence(s, curr.toString(), k)) {
+                result = curr.toString();
+                return true;
+            }
+            return false;
         }
 
-        String currStr = curr.toString();
-        if ((curr.length() > result.length() || 
-             (curr.length() == result.length() && currStr.compareTo(result) > 0)) 
-            &&
-            isSubsequence(s, currStr, k)) {
-                
-            result = currStr;
-        }
-
-        for (int i = 25; i >= 0; i--) { // from 'z' to 'a' for lexicographically larger result
-            if (!canUse[i] || maxFreqInOneSubsequence[i] == 0) {
+        for (int i = 25; i >= 0; i--) {
+            if (!canUse[i] || requiredFreq[i] == 0){
                 continue;
             }
 
             curr.append((char) (i + 'a'));
-            maxFreqInOneSubsequence[i]--;
+            requiredFreq[i]--;
 
-            solve(s, curr, canUse, maxFreqInOneSubsequence, k, maxLen);
-
+            if (backtracking(s, curr, canUse, requiredFreq, k, maxLen)){
+                return true;
+            
+            }
             curr.deleteCharAt(curr.length() - 1);
-            maxFreqInOneSubsequence[i]++;
+            requiredFreq[i]++;
         }
+
+        return false;
     }
 
     public String longestSubsequenceRepeatedK(String s, int k) {
         int n = s.length();
-        int[] freqMap = new int[26];
-        for(char ch : s.toCharArray()) {
-            freqMap[ch - 'a']++;
+        int[] freq = new int[26];
+
+        for (char ch : s.toCharArray()) {
+            freq[ch - 'a']++;
         }
 
         boolean[] canUse = new boolean[26];
-        int[] maxFreqInOneSubsequence = new int[26];
-        for(int i=0;i<26;i++) {
-            if(freqMap[i] >= k) {
+        int[] requiredFreq = new int[26];
+
+        for (int i = 0; i < 26; i++) {
+            if (freq[i] >= k) {
                 canUse[i] = true;
-                maxFreqInOneSubsequence[i] = freqMap[i]/k; // at-most
+                requiredFreq[i] = freq[i] / k; // Max times a char can be used in a subsequence
             }
         }
 
-        int maxLen = n/k;
+        int maxLen = n / k;
 
-        StringBuilder curr = new StringBuilder();
-        solve(s, curr, canUse, maxFreqInOneSubsequence, k, maxLen);
+        for (int len = maxLen; len >= 1; len--) {
+            int[] tempRequiredFreq = requiredFreq.clone();  // Copy current state
+            StringBuilder curr = new StringBuilder();
+
+            if (backtracking(s, curr, canUse, tempRequiredFreq, k, len)) {
+                return result;
+            }
+        }
+
         return result;
     }
-
-
 }
