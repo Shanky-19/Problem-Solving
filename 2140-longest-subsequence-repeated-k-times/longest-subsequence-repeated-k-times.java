@@ -3,7 +3,10 @@ class Solution {
 
     // Check if seq * k is a subsequence of s
     private boolean isSubsequence(String s, String sub, int k) {
-        int i = 0, j = 0, len = sub.length(), n = s.length();
+        int i = 0;
+        int j = 0;
+        int len = sub.length();
+        int n = s.length();
 
         while (i < n && j < k * len) {
             if (s.charAt(i) == sub.charAt(j % len)) {
@@ -12,7 +15,7 @@ class Solution {
             i++;
         }
 
-        return j == k * len;
+        return (j == k * len);
     }
 
     private void solve(String s, StringBuilder curr, boolean[] canUse,
@@ -24,8 +27,10 @@ class Solution {
 
         String currStr = curr.toString();
         if ((curr.length() > result.length() || 
-             (curr.length() == result.length() && currStr.compareTo(result) > 0)) &&
+             (curr.length() == result.length() && currStr.compareTo(result) > 0)) 
+            &&
             isSubsequence(s, currStr, k)) {
+                
             result = currStr;
         }
 
