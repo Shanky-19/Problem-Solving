@@ -18,6 +18,7 @@ class Solution {
             }
         }
         
+        // column safety
         for(int jj=0;jj<board.length;jj++){
             if(board[i][jj] == (char)('0'+val)){
                 return false;
@@ -27,6 +28,7 @@ class Solution {
         int cornerx = i/3 * 3;
         int cornery = j/3 * 3;
         
+        // 3X3 matrix safety
         for(int ii=0;ii<3;ii++){
             for(int jj=0;jj<3;jj++){
                 if(board[cornerx + ii][cornery + jj] == (char)('0'+val)){
