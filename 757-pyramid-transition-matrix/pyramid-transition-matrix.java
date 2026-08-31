@@ -1,7 +1,8 @@
 class Solution {
 
     private boolean solve(String currBottom, Map<String, List<Character>> map, 
-                        int idx, StringBuilder aboveLayer, Map<String, Boolean> memo) {
+                        int idx, StringBuilder aboveLayer, 
+                            Map<String, Boolean> memo) {
         if(currBottom.length() == 1) {
             return true;
         }
