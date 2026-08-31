@@ -1,31 +1,40 @@
 class Solution {
 
     private boolean solve(String currBottom, Map<String, List<Character>> map, 
-                        int idx, StringBuilder aboveLayer) {
+                        int idx, StringBuilder aboveLayer, Map<String, Boolean> memo) {
         if(currBottom.length() == 1) {
             return true;
         }
 
+        String memoKey = currBottom + "_" + idx + "_" + aboveLayer.toString();
+        if(memo.containsKey(memoKey)) {
+            return memo.get(memoKey);
+        }
+
         if(idx == currBottom.length()-1) {
             boolean res = 
-                solve(aboveLayer.toString(), map, 0, new StringBuilder());
+                solve(aboveLayer.toString(), map, 0, new StringBuilder(), memo);
+            memo.put(memoKey, res);
             return res;
         }
 
         String base = currBottom.substring(idx, idx+2);
 
         if(!map.containsKey(base)) {
+            memo.put(memoKey, false);
             return false;
         }
 
         for(char ch : map.get(base)) {
             aboveLayer.append(ch);
-            if(solve(currBottom, map, idx+1, aboveLayer)) {
+            if(solve(currBottom, map, idx+1, aboveLayer, memo)) {
+                memo.put(memoKey, true);
                 return true;
             }
             aboveLayer.deleteCharAt(aboveLayer.length()-1);
         }
 
+        memo.put(memoKey, false);
         return false;
     } 
 
@@ -46,7 +55,9 @@ class Solution {
         }
         int idx = 0;
         StringBuilder aboveLayer = new StringBuilder();
-        boolean ans = solve(bottom, map, idx, aboveLayer);
+
+        Map<String, Boolean> memo = new HashMap<>();
+        boolean ans = solve(bottom, map, idx, aboveLayer, memo);
         return ans;
     }
 }
