@@ -9,7 +9,6 @@ class Solution {
         }
     }
     
-    
     public boolean isSafe(char[][] board,int i,int j,int val){
         // row safety
         for(int ii=0;ii<board.length;ii++){
