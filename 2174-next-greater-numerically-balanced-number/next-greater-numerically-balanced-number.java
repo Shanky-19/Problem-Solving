@@ -1,27 +1,36 @@
 class Solution {
+    private int[] digitCount = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
 
-    private boolean isBalanced(int num) {
-        int[] freq = new int[10];
-        while(num > 0) {
-            int digit = num%10;
-            freq[digit]++;
-            num = num/10;
-        }
-
-        for(int d=0;d<10;d++) {
-            if(freq[d] != 0 && freq[d] != d) {
-                return false;
+    private int backtrack(int n, int curr, int count) {
+        if (count == 0) {
+            for (int digit = 1; digit <= 9; digit++) {
+                if (digitCount[digit] != 0 && digitCount[digit] != digit) {
+                    return 0;
+                }
             }
+            return curr > n ? curr : 0;
         }
-        return true;
+
+        int result = 0;
+        for (int digit = 1; digit <= 9; digit++) {
+            if (digitCount[digit] > 0 && digitCount[digit] <= count) {
+                digitCount[digit]--;
+                result = backtrack(n, curr * 10 + digit, count - 1);
+                digitCount[digit]++;
+            }
+            if (result != 0) break;
+        }
+        return result;
     }
 
     public int nextBeautifulNumber(int n) {
-        for(int num = n+1;num<=1224444;num++) {
-            if(isBalanced(num)) {
-                return num;
-            }
+        int numDigits = String.valueOf(n).length();
+
+        int result = backtrack(n, 0, numDigits);
+        if (result == 0) {
+            result = backtrack(n, 0, numDigits + 1);
         }
-        return 0;
+
+        return result;
     }
 }
