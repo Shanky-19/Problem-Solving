@@ -14,7 +14,8 @@
  * }
  */
 class Solution {
-    public TreeNode buildTreeHelper(int[] preorder,int[] inorder,int psi,int pei,int isi,int iei){
+    public TreeNode buildTreeHelper(int[] preorder,int[] inorder,
+                            int psi,int pei,int isi,int iei){
         if(psi > pei){
             return null;
         }
@@ -26,15 +27,18 @@ class Solution {
         
         TreeNode root = new TreeNode(preorder[psi]);
 
-        root.left = buildTreeHelper(preorder,inorder,psi+1,psi+countOfLeftSubtreeElements,isi,idx-1);
+        root.left = buildTreeHelper(preorder,inorder,psi+1,
+                        psi+countOfLeftSubtreeElements,isi,idx-1);
 
-        root.right = buildTreeHelper(preorder,inorder,psi+countOfLeftSubtreeElements+1,pei,idx+1,iei);
+        root.right = buildTreeHelper(preorder,inorder,
+                        psi+countOfLeftSubtreeElements+1,pei,idx+1,iei);
 
         return root;
     }
 
     public TreeNode buildTree(int[] preorder, int[] inorder) {
-        TreeNode root = buildTreeHelper(preorder,inorder,0,preorder.length-1,0,inorder.length-1);
+        TreeNode root = buildTreeHelper(preorder,inorder,0,
+                            preorder.length-1,0,inorder.length-1);
 
         return root;
     }
