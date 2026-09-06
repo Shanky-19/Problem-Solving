@@ -53,9 +53,6 @@ class Solution {
                 if(front.right != null) {
                     q.offer(front.right);
                 }
-                
-
-                
             }
             if(currDepth == depth-1) {
                 break;
