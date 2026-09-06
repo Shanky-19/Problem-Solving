@@ -14,23 +14,39 @@
  * }
  */
 class Solution {
-    public int height(TreeNode root){
-        if(root == null){
-            return 0;
+    
+    private int leftHeight(TreeNode root) {
+        int leftHeight = 0;
+        TreeNode temp = root;
+        while(temp != null) {
+            temp = temp.left;
+            leftHeight++;
         }
-
-        int hl = height(root.left);
-        int hr = height(root.right);
-
-        return Math.max(hl,hr) + 1;
-
+        return leftHeight;
     }
+
+    private int rightHeight(TreeNode root) {
+        int rightHeight = 0;
+        TreeNode temp = root;
+        while(temp != null) {
+            temp = temp.right;
+            rightHeight++;
+        }
+        return rightHeight;
+    }
+
     public int countNodes(TreeNode root) {
         if(root == null){
             return 0;
         }
-        int ans1 = countNodes(root.left);
-        int ans2 = countNodes(root.right);
-        return ans1+ans2+1;
+
+        int leftHeight = leftHeight(root);
+        int rightHeight = rightHeight(root);
+
+        if(leftHeight == rightHeight) {
+            return (int)Math.pow(2, leftHeight) - 1;
+        }
+
+        return 1 + countNodes(root.left) + countNodes(root.right);
     }
 }
