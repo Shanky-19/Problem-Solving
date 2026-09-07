@@ -1,6 +1,7 @@
 class Solution {
     long MOD = 1000000007L;
     long ans = 0;
+
     private long dfs(TreeNode node) {
         if (node == null) {
             return 0;
@@ -11,9 +12,9 @@ class Solution {
 
     public int maxProduct(TreeNode root) {
         long total = dfs(root); 
+        
         Queue<TreeNode> q = new LinkedList<>();
         q.add(root);
-
         while (!q.isEmpty()) {
             TreeNode node = q.poll();
             if (node == null) {
