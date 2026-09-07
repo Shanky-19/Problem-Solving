@@ -53,16 +53,7 @@ class Solution {
             return 0;
         }
 
-        Pair leftPair = solve(root.left);
-        Pair rightPair = solve(root.right);
-        
-        int min = Math.min(leftPair.min, rightPair.min);
-        int max = Math.max(leftPair.max, rightPair.max);
-
-        ans = Math.max(Math.abs(min-root.val), ans);
-        ans = Math.max(Math.abs(max-root.val), ans);
-
-        Pair p = new Pair(Math.min(min, root.val), Math.max(max, root.val));
+        solve(root);
         return ans;
     }
 }
