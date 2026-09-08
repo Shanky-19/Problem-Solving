@@ -15,14 +15,15 @@
  */
 class Solution {
 
-    private String solve(TreeNode root, Map<String, Integer> map, List<TreeNode> ans) {
+    private String solve(TreeNode root, Map<String, Integer> map, 
+                        List<TreeNode> ans) {
         if(root == null) {
             return "N";
         }
 
         String str = root.val + "," + solve(root.left, map, ans) 
                     + "," + solve(root.right, map, ans);
-                    
+
         if(map.containsKey(str) && map.get(str) == 1) {
             ans.add(root);
         }
