@@ -20,7 +20,9 @@ class Solution {
             return "N";
         }
 
-        String str = root.val + "," + solve(root.left, map, ans) + "," + solve(root.right, map, ans);
+        String str = root.val + "," + solve(root.left, map, ans) 
+                    + "," + solve(root.right, map, ans);
+                    
         if(map.containsKey(str) && map.get(str) == 1) {
             ans.add(root);
         }
