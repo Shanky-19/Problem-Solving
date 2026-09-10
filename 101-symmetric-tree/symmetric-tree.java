@@ -29,6 +29,7 @@ class Solution {
         if(p==null || q==null) {
             return false;
         }
-        return (p.val==q.val) && isMirror(p.left,q.right) && isMirror(p.right,q.left);
+        return (p.val==q.val) && isMirror(p.left,q.right) 
+                && isMirror(p.right,q.left);
     }
 }
