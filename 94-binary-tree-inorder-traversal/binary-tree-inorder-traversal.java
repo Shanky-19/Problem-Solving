@@ -15,40 +15,30 @@
  */
 class Solution {
     public List<Integer> inorderTraversal(TreeNode root) {
-        List<Integer> ans = new ArrayList<>();
+        if(root == null) {
+            return new ArrayList<>();
+        }
 
-        // recursive
-        /*
-        recursiveInorder(root, ans);
-        return ans;
-        */
-
-
-        // Iterative
-        Stack<TreeNode> stack = new Stack<>();
         TreeNode curr = root;
-        while (!stack.isEmpty() || curr != null) {
-            if (curr != null) {
-                stack.push(curr);
-                curr = curr.left;
-            }
-            else {
-                curr = stack.pop();
+        TreeNode prev = null;
+        List<Integer> ans = new ArrayList<>();
+        while(curr != null) {
+            if(curr.left == null) {
                 ans.add(curr.val);
                 curr = curr.right;
+            } else {
+                prev = curr.left;
+
+                while(prev.right != null) {
+                    prev = prev.right;
+                }
+
+                prev.right = curr;
+                TreeNode temp = curr;
+                curr = curr.left;
+                temp.left = null;
             }
         }
         return ans;
-
-    }
-
-    private void recursiveInorder(TreeNode root, List<Integer> ans) {
-        if(root == null) {
-            return;
-        }
-
-        recursiveInorder(root.left, ans);
-        ans.add(root.val);
-        recursiveInorder(root.right, ans);
     }
 }
