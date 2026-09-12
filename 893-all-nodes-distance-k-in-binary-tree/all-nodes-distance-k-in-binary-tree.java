@@ -31,7 +31,7 @@ class Solution {
 
         Queue<TreeNode> queue = new LinkedList<>();
         queue.offer(target);
-        Set<Integer> visited = new HashSet<>();
+        Set<TreeNode> visited = new HashSet<>();
 
         while (!queue.isEmpty()) {
 
@@ -46,21 +46,21 @@ class Solution {
 
                 TreeNode curr = queue.poll();
 
-                visited.add(curr.val);
+                visited.add(curr);
 
                 // Left child
-                if (curr.left != null && !visited.contains(curr.left.val)) {
+                if (curr.left != null && !visited.contains(curr.left)) {
                     queue.offer(curr.left);
                 }
 
                 // Right child
-                if (curr.right != null && !visited.contains(curr.right.val)) {
+                if (curr.right != null && !visited.contains(curr.right)) {
                     queue.offer(curr.right);
                 }
 
                 // Parent
                 if (parent.containsKey(curr)
-                        && !visited.contains(parent.get(curr).val)) {
+                        && !visited.contains(parent.get(curr))) {
 
                     queue.offer(parent.get(curr));
                 }
