@@ -18,7 +18,8 @@
 //S.C : O(n) - storing all nodes in graph
 public class Solution {
 
-    public void convert(TreeNode current, int parent, Map<Integer, List<Integer>> adj) {
+    public void convert(TreeNode current, int parent, 
+                        Map<Integer, List<Integer>> adj) {
         if (current == null) {
             return;
         }
