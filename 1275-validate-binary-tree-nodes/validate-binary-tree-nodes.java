@@ -1,5 +1,6 @@
 class Solution {
-    public boolean validateBinaryTreeNodes(int n, int[] leftChild, int[] rightChild) {
+    public boolean validateBinaryTreeNodes(int n, int[] leftChild, 
+                                        int[] rightChild) {
         Map<Integer, Integer> childToParent = new HashMap<>();
 
         // 1. Every child should have only 1 parent
@@ -34,7 +35,8 @@ class Solution {
             return false;
         }
 
-        // 3. Only 1 connected component -> in one DFS or BFS entire tree should be visited
+        // 3. Only 1 connected component -> in one DFS 
+        // or BFS entire tree should be visited
         Queue<Integer> q = new LinkedList<>();
         q.offer(root);
         boolean[] visited = new boolean[n];
