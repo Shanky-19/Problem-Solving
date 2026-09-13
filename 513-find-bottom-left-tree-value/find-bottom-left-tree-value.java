@@ -14,33 +14,27 @@
  * }
  */
 class Solution {
-    public int findBottomLeftValue(TreeNode root) {
+    int maxLevel = -1;
+    int ans = Integer.MIN_VALUE;
 
-        Queue<TreeNode> q = new LinkedList<>();
-        q.offer(root);
-        int ans = Integer.MIN_VALUE;
-        while(q.size() > 0) {
-            int i = 0;
-            int size = q.size();
-            while(i < size) {
-                
-                TreeNode front = q.poll();
-
-                if(i == 0) {
-                    ans = front.val;
-                }
-
-                if(front.left != null) {
-                    q.offer(front.left);
-                }
-
-                if(front.right != null) {
-                    q.offer(front.right);
-                }
-
-                i++;
-            }
+    private void solve(TreeNode root, int currLevel) {
+        if(root == null) {
+            return;
         }
+
+        if(currLevel > maxLevel) {
+            maxLevel = currLevel;
+            ans = root.val;
+        }
+
+        solve(root.left, currLevel+1);
+        solve(root.right, currLevel+1);
+    }
+
+
+    public int findBottomLeftValue(TreeNode root) {
+        int currLevel = 0;
+        solve(root, currLevel);
         return ans;
     }
 }
