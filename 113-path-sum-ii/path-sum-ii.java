@@ -24,6 +24,7 @@ class Solution {
         if(root.left == null && root.right == null && root.val == targetSum) {
             ans.add(new ArrayList<>(al));
         }
+        
         solve(root.left, targetSum - root.val, al, ans);
         solve(root.right, targetSum - root.val, al, ans);
 
