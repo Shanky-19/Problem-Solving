@@ -15,7 +15,8 @@
  */
 public class Solution {
 
-    public List<Integer> solve(TreeNode root, int distance, int[] goodLeafNodes) {
+    public List<Integer> solve(TreeNode root, int distance, 
+                                int[] goodLeafNodes) {
         if (root == null) {
             List<Integer> emptyList = new ArrayList<>();
             return emptyList;
@@ -27,8 +28,11 @@ public class Solution {
             return leafList;
         }
 
-        List<Integer> leftDistances = solve(root.left, distance, goodLeafNodes);
-        List<Integer> rightDistances = solve(root.right, distance, goodLeafNodes);
+        List<Integer> leftDistances = 
+                        solve(root.left, distance, goodLeafNodes);
+
+        List<Integer> rightDistances = 
+                        solve(root.right, distance, goodLeafNodes);
 
         for (int l : leftDistances) {
             for (int r : rightDistances) {
