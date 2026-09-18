@@ -21,51 +21,39 @@ class Solution {
 
         Queue<TreeNode> queue = new LinkedList<>();
         queue.add(root);
-        List<Integer> levelSum = new ArrayList<>();
+        int levelSum = root.val;
 
-        // Step-1: Find the sum of each level and 
-        // store it in the levelSum list
-        while (!queue.isEmpty()) {
-            int currLevelSum = 0;
-            int n = queue.size();
-            for (int i = 0; i < n; i++) {
-                TreeNode curr = queue.poll();
-                currLevelSum += curr.val;
-                if (curr.left != null) {
-                    queue.add(curr.left);
-                }
-                if (curr.right != null) {
-                    queue.add(curr.right);
-                }
-            }
-            levelSum.add(currLevelSum);
-        }
-
-        // Step-2: Update each node value with the cousin sum
-        queue.add(root);
-        root.val = 0;  // root has no cousins
-        int level = 1;
         while (!queue.isEmpty()) {
             int n = queue.size();
+            int nextLevelSum = 0;
 
             for (int i = 0; i < n; i++) {
                 TreeNode curr = queue.poll();
 
-                // levelSum of currentLevel - familySum
-                int familySum = 
-                        (curr.left != null ? curr.left.val : 0) 
-                    + (curr.right != null ? curr.right.val : 0);
+                // Update current node value
+                curr.val = levelSum - curr.val;
 
+                int siblingSum = 
+                                (curr.left != null ? curr.left.val : 0) +
+                                (curr.right != null ? curr.right.val : 0);
+
+                // Process left child
                 if (curr.left != null) {
-                    curr.left.val = levelSum.get(level) - familySum;
+                    nextLevelSum += curr.left.val;
+                    curr.left.val = siblingSum;
                     queue.add(curr.left);
                 }
+
+                // Process right child
                 if (curr.right != null) {
-                    curr.right.val = levelSum.get(level) - familySum;
+                    nextLevelSum += curr.right.val;
+                    curr.right.val = siblingSum;
                     queue.add(curr.right);
                 }
             }
-            level++;
+
+            // Move to the next level
+            levelSum = nextLevelSum;
         }
 
         return root;
