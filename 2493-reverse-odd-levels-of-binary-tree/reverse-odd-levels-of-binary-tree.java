@@ -28,12 +28,14 @@ class Solution {
                 int[] nums = new int[q.size()];
                 int i = 0;
                 for (TreeNode node : q) {
-                    nums[i++] = node.val;
+                    nums[i] = node.val;
+                    i++;
                 }
 
                 int j = q.size() - 1;
                 for (TreeNode node : q) {
-                    node.val = nums[j--];
+                    node.val = nums[j];
+                    j--;
                 }
             }
 
