@@ -14,25 +14,25 @@
  * }
  */
 class Solution {
-    public int countMinSwapsToSort(List<Integer> vec) {
+    public int countMinSwapsToSort(List<Integer> list) {
         int swaps = 0;
-        List<Integer> sortedVec = new ArrayList<>(vec);
-        Collections.sort(sortedVec);
+        List<Integer> sortedList = new ArrayList<>(list);
+        Collections.sort(sortedList);
 
         Map<Integer, Integer> mp = new HashMap<>(); // nums[i] -> i
-        for (int i = 0; i < vec.size(); i++) {
-            mp.put(vec.get(i), i);
+        for (int i = 0; i < list.size(); i++) {
+            mp.put(list.get(i), i);
         }
 
-        for (int i = 0; i < vec.size(); i++) {
-            if (vec.get(i).equals(sortedVec.get(i))) {
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i).equals(sortedList.get(i))) {
                 continue; // no swap required
             }
 
-            int currIdx = mp.get(sortedVec.get(i));
-            mp.put(vec.get(i), currIdx);
-            mp.put(vec.get(currIdx), i);
-            Collections.swap(vec, currIdx, i);
+            int currIdx = mp.get(sortedList.get(i));
+            mp.put(list.get(i), currIdx);
+            mp.put(list.get(currIdx), i);
+            Collections.swap(list, currIdx, i);
             swaps++;
         }
 
@@ -47,11 +47,11 @@ class Solution {
 
         while (!que.isEmpty()) {
             int n = que.size(); // total nodes in the current level
-            List<Integer> vec = new ArrayList<>();
+            List<Integer> list = new ArrayList<>();
 
             for (int i = 0; i < n; i++) {
                 TreeNode temp = que.poll();
-                vec.add(temp.val);
+                list.add(temp.val);
 
                 if (temp.left != null) {
                     que.add(temp.left);
@@ -62,7 +62,7 @@ class Solution {
                 }
             }
 
-            result += countMinSwapsToSort(vec);
+            result += countMinSwapsToSort(list);
         }
 
         return result;
