@@ -27,14 +27,8 @@ class FindElements {
     }
 
     public FindElements(TreeNode root) {
-        if(root == null) {
-            return;
-        }
         set = new HashSet<>();
-        root.val = 0;
-        set.add(root.val);
-        recover(root.left, 2*0 + 1);
-        recover(root.right, 2*0 + 2);
+        recover(root, 0);
     }
     
     public boolean find(int target) {
