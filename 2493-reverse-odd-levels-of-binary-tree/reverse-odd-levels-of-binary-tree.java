@@ -36,12 +36,16 @@ class Solution {
                     node.val = nums[j--];
                 }
             }
-            
+
             int size = q.size();
             while (size-- > 0) {
                 TreeNode node = q.poll();
-                if (node.left != null) q.offer(node.left);
-                if (node.right != null) q.offer(node.right);
+                if (node.left != null) {
+                    q.offer(node.left);
+                }
+                if (node.right != null) {
+                    q.offer(node.right);
+                }
             }
 
             level++;
