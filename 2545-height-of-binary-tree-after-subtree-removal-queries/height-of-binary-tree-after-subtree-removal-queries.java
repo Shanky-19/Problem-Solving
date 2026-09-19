@@ -51,8 +51,8 @@ class Solution {
 
             // Calculate result for this node
             int tempResult = L + 
-                                (levelMaxHt[L] == height[node] ? levelSecondMaxHt[L] 
-                                : levelMaxHt[L]) - 1;
+                            (levelMaxHt[L] == height[node] ? levelSecondMaxHt[L] 
+                            : levelMaxHt[L]) - 1;
             result[i] = tempResult;
         }
 
