@@ -1,5 +1,6 @@
 class Solution {
-    static class Node {
+    
+    private static class Node {
         int prod;
         int[] freq;
         Node(int k) {
