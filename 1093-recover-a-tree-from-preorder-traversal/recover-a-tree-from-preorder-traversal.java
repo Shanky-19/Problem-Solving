@@ -36,7 +36,8 @@ class Solution {
         idx += dash;
 
         int value = 0;
-        while (idx < traversal.length() && Character.isDigit(traversal.charAt(idx))) {
+        while (idx < traversal.length() 
+                && Character.isDigit(traversal.charAt(idx))) {
             value = value * 10 + (traversal.charAt(idx) - '0');
             idx++;
         }
