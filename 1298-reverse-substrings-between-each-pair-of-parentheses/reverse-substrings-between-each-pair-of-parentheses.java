@@ -4,7 +4,7 @@ class Solution {
         Stack<Integer> openBracket = new Stack<>();
         int[] door = new int[n];
 
-        // First pass: Pair up parentheses
+        // First pass: Pair up Parentheses
         for (int i = 0; i < n; ++i) {
             if (s.charAt(i) == '(') {
                 openBracket.push(i);
@@ -15,7 +15,7 @@ class Solution {
             }
         }
 
-        // Second pass: Build the result string
+        // Second pass: Build the result String
         StringBuilder result = new StringBuilder();
         int direction = 1; // Left to Right
         for (int i = 0; i < n; i += direction) {
