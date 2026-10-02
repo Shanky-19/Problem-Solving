@@ -24,6 +24,7 @@ public class Solution {
                 xXora ^= (1L << i);
                 xXorb ^= (1L << i);
             } else {
+                // balancing
                 if (xXora > xXorb) {
                     xXorb ^= (1L << i);
                 } else {
