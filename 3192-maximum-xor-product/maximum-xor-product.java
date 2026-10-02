@@ -23,13 +23,12 @@ public class Solution {
             if (aset == bset) {
                 xXora ^= (1L << i);
                 xXorb ^= (1L << i);
-                continue;
-            }
-
-            if (xXora > xXorb) {
-                xXorb ^= (1L << i);
             } else {
-                xXora ^= (1L << i);
+                if (xXora > xXorb) {
+                    xXorb ^= (1L << i);
+                } else {
+                    xXora ^= (1L << i);
+                }
             }
         }
 
