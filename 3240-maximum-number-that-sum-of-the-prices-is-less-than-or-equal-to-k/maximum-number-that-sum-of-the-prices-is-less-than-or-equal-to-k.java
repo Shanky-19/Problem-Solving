@@ -1,15 +1,6 @@
 //T.C : O(log(k) * log(num)) - ACCEPTED
 //S.C : O(1)
 public class Solution {
-    // Define a long long type in Java
-    static class LL {
-        long value;
-        
-        LL(long value) {
-            this.value = value;
-        }
-    }
-
     // Equivalent of vector<ll> bitCount
     static long[] bitCount;
 
@@ -67,7 +58,6 @@ public class Solution {
                 high = mid - 1;
             }
         }
-
         return result;
     }
 }
