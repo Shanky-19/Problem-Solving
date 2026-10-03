@@ -1,7 +1,6 @@
 //T.C : O(log(k) * log(num)) - ACCEPTED
 //S.C : O(1)
 public class Solution {
-    // Equivalent of vector<ll> bitCount
     static long[] bitCount;
 
     public static void getBits(long number) {
