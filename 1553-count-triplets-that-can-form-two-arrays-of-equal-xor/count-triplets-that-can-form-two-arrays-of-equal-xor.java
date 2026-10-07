@@ -10,8 +10,8 @@ class Solution {
         for(int i=0;i<n-1;i++) {
             for(int j=i+1;j<n;j++) {
                 for(int k=j;k<n;k++) {
-                    int val1 = cumXor[j] ^ arr[j] ^ cumXor[i] ^ arr[i];
-                    int val2 = cumXor[k] ^ cumXor[j] ^ arr[j];
+                    int val1 = cumXor[j-1] ^ cumXor[i] ^ arr[i];
+                    int val2 = cumXor[k] ^ cumXor[j-1];
                     if(val1 == val2) {
                         // System.out.println(i + " " + j + " " + k);
                         count++;
