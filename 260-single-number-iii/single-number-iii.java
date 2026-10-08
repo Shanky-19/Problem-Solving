@@ -5,7 +5,8 @@ class Solution {
             ansXor = ansXor ^ val;
         }
         // xor of two number to numbers
-        int rsbm = ansXor & -ansXor;
+        int rsbm = ansXor & -ansXor; // right most set bit
+    
         int setA = 0;
         int setB = 0;
         for(int val : nums){
