@@ -4,16 +4,19 @@ class Solution {
         Map<String, Integer> mp = new HashMap<>();
         
         // Initialize an array to track the parity of each vowel
-        int[] state = new int[5]; // [a, e, i, o, u] initialized to 0 (even count)
+        // [a, e, i, o, u] initialized to 0 (even count)
+        int[] state = new int[5];
 
-        String currentState = "00000";  // Start with all vowels having an even count
+        // Start with all vowels having an even count
+        String currentState = "00000";
         mp.put(currentState, -1);
         
         int maxLength = 0;
         
         for (int i = 0; i < s.length(); ++i) {
             // Update state based on the vowel encountered
-            if (s.charAt(i) == 'a') state[0] ^= 1;  // Flip between even/odd for 'a'
+            // Flip between even/odd for 'a'
+            if (s.charAt(i) == 'a') state[0] ^= 1;  
             else if (s.charAt(i) == 'e') state[1] ^= 1; // Flip for 'e'
             else if (s.charAt(i) == 'i') state[2] ^= 1; // Flip for 'i'
             else if (s.charAt(i) == 'o') state[3] ^= 1; // Flip for 'o'
