@@ -16,9 +16,6 @@ class Solution {
             }
         }
 
-        System.out.println(x);
-
-
         int i = 0;
         while(i<32 && countOnes > 0) {
             if((x & (1<<i)) == 0) {
