@@ -1,7 +1,7 @@
 class Solution {
     public int maxSum(List<Integer> nums, int k) {
         final int MOD = 1_000_000_007;
-        final int BITS = 30;                  // nums[i] <= 10^9 < 2^30
+        final int BITS = 30;// nums[i] <= 10^9 < 2^30
 
         // count[b] = number of 1s in bit column b
         int[] count = new int[BITS];
@@ -9,7 +9,7 @@ class Solution {
         for (int num : nums) {
             for (int b = 0; b < BITS; b++) {
                 if ((num & (1 << b)) != 0) {
-                    count[b]++;               // found a '1' in bit position b
+                    count[b]++;// found a '1' in bit position b
                 }
             }
         }
@@ -22,7 +22,7 @@ class Solution {
             for (int b = 0; b < BITS; b++) {
                 if (count[b] > 0) {
                     count[b]--;
-                    curr |= (1L << b);        // 1L so it is a long, not an int
+                    curr |= (1L << b);// 1L so it is a long, not an int
                 }
             }
 
