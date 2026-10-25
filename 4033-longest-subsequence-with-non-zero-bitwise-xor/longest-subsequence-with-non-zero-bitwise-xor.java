@@ -15,7 +15,7 @@ class Solution {
             return ans;
         }
 
-        // case of all values are zero 
+        // case where all values are zero 
         if(nonZero == 0) {
             return 0;
         }
