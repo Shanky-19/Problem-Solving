@@ -1,6 +1,3 @@
-//Approach - Using map
-//T.C : O(n)
-//S.C : O(n)
 class Solution {
     public int longestPalindrome(String[] words) {
         Map<String, Integer> map = new HashMap<>();
