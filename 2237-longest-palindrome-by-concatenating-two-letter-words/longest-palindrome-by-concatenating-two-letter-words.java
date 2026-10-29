@@ -1,5 +1,5 @@
 //Approach - Using map
-//T.C : O(n), where n = number of words
+//T.C : O(n)
 //S.C : O(n)
 class Solution {
     public int longestPalindrome(String[] words) {
