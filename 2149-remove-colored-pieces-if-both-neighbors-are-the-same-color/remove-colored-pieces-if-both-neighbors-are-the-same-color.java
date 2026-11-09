@@ -18,11 +18,7 @@ class Solution {
             }
         }
 
-        while(alice > 0 && bob > 0) {
-            alice--;
-            bob--;
-        }
-        return alice > 0;
+        return (alice > bob);
 
     }
 }
