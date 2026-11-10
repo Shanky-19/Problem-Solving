@@ -3,7 +3,7 @@ class Solution {
         int n = dist.length;
         PriorityQueue<Integer> pq = new PriorityQueue<>();
         for(int i=0;i<n;i++) {
-            pq.add((int)Math.ceil((double)dist[i]/speed[i]));
+            pq.add((int)Math.ceil((1.0 * dist[i])/speed[i]));
         }
 
         int count = 0;
