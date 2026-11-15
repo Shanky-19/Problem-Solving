@@ -10,7 +10,7 @@ class Solution {
         for (int i = 0; i < 26; i++) {
             if (f[i] == 0) continue;
             int del = 0;
-            int cur = f[i];
+            int cur = f[i]; // assuming this as min freq of array elements.
 
             for (int j = 0; j < 26; j++) {
                 if (f[j] < cur) {
@@ -25,3 +25,9 @@ class Solution {
         return ans;
     }
 }
+
+// In simple words: 
+// try different minimum frequencies, 
+// remove characters below that frequency, 
+// and reduce larger frequencies so all remaining 
+// counts stay within a difference of k.
