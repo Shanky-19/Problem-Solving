@@ -12,7 +12,8 @@ class Solution {
         If at the end idle spots is 0, it means all idle spots were enough
         to accomodate all other taks. So, out result will be tasks.size();
         
-        If, idle spots are not empty, it means that we need more spaces (equal to idle spots)
+        If, idle spots are not empty, it means that we need 
+        more spaces (equal to idle spots)
         than the tasks.size() to accomodate all tasks.
         So, result = tasks.size() + idol_spots
     */
