@@ -9,7 +9,12 @@ class Solution {
             int currMin = arrays.get(i).get(0);
             int currMax = arrays.get(i).get(arrays.get(i).size() - 1);
 
-            result = Math.max(result, Math.max(Math.abs(currMin - MAX), Math.abs(currMax - MIN)));
+            result = Math.max(result, 
+                            Math.max(
+                                    Math.abs(currMin - MAX), 
+                                    Math.abs(currMax - MIN)
+                                    )
+                            );
 
             MAX = Math.max(MAX, currMax);
             MIN = Math.min(MIN, currMin);
