@@ -1,37 +1,43 @@
-
 class Solution {
     public double maxAverageRatio(int[][] classes, int extraStudents) {
-        PriorityQueue<double[]> pq = new PriorityQueue<>(new Comparator<double[]>() {
-            public int compare(double[] a, double[] b) {
-                if (a[0] < b[0]) return 1;
-                if (a[0] > b[0]) return -1;
-                return 0;
-            }
-        });
+        int n = classes.length;
 
-        for (int i = 0; i < classes.length; i++) {
-            double pass = classes[i][0];
-            double total = classes[i][1];
-            double inc = (pass + 1.0) / (total + 1.0) - pass / total;
-            pq.offer(new double[]{inc, pass, total});
+        // Priority queue to act as a max-heap, storing pairs of {max-delta, index}
+        PriorityQueue<double[]> pq = new PriorityQueue<>((a, b) -> Double.compare(b[0], a[0]));
+
+        // Initialize the priority queue with the delta values and indices
+        for (int i = 0; i < n; i++) {
+            double currentPR = (double) classes[i][0] / classes[i][1];
+            double newPR = (double) (classes[i][0] + 1) / (classes[i][1] + 1);
+            double delta = newPR - currentPR;
+            pq.offer(new double[]{delta, i});
         }
 
-        while (extraStudents > 0) {
-            double[] top = pq.poll();
-            double pass = top[1] + 1;
-            double total = top[2] + 1;
-            double inc = (pass + 1.0) / (total + 1.0) - pass / total;
-            pq.offer(new double[]{inc, pass, total});
-            extraStudents--;
+        // Allocate extra students
+        while (extraStudents-- > 0) {
+            // Extract the class with the maximum delta
+            double[] curr = pq.poll();
+            int idx = (int) curr[1];
+
+            // Update the class with an extra student
+            classes[idx][0]++;
+            classes[idx][1]++;
+
+            // Recalculate the delta for this class
+            double currentPR = (double) classes[idx][0] / classes[idx][1];
+            double newPR = (double) (classes[idx][0] + 1) / (classes[idx][1] + 1);
+            double delta = newPR - currentPR;
+
+            // Push the updated delta and index back into the priority queue
+            pq.offer(new double[]{delta, idx});
         }
 
-        double sum = 0.0;
-        Object[] arr = pq.toArray();
-        for (int i = 0; i < arr.length; i++) {
-            double[] c = (double[]) arr[i];
-            sum += c[1] / c[2];
+        // Calculate the final average pass ratio
+        double result = 0.0;
+        for (int i = 0; i < n; i++) {
+            result += (double) classes[i][0] / classes[i][1];
         }
 
-        return sum / classes.length;
+        return result / n;
     }
 }
