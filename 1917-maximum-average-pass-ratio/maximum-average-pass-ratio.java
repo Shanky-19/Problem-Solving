@@ -2,8 +2,10 @@ class Solution {
     public double maxAverageRatio(int[][] classes, int extraStudents) {
         int n = classes.length;
 
-        // Priority queue to act as a max-heap, storing pairs of {max-delta, index}
-        PriorityQueue<double[]> pq = new PriorityQueue<>((a, b) -> Double.compare(b[0], a[0]));
+        // Priority queue to act as a max-heap, 
+        // storing pairs of {max-delta, index}
+        PriorityQueue<double[]> pq = 
+            new PriorityQueue<>((a, b) -> Double.compare(b[0], a[0]));
 
         // Initialize the priority queue with the delta values and indices
         for (int i = 0; i < n; i++) {
@@ -25,7 +27,10 @@ class Solution {
 
             // Recalculate the delta for this class
             double currentPR = (double) classes[idx][0] / classes[idx][1];
-            double newPR = (double) (classes[idx][0] + 1) / (classes[idx][1] + 1);
+            
+            double newPR = 
+                    (double) (classes[idx][0] + 1) / (classes[idx][1] + 1);
+
             double delta = newPR - currentPR;
 
             // Push the updated delta and index back into the priority queue
