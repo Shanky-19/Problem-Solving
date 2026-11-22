@@ -50,9 +50,4 @@ class Solution {
 
         return dp[idx][k] = Math.max(length1, length2);
     }
-
-
-
-
-
 }
