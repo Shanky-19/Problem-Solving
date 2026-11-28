@@ -1,19 +1,42 @@
 class MyHashSet {
-    private boolean[] storage;
+
+    int numBuckets;
+    List<LinkedList<Integer>> buckets;
+
+    private int getHashValue(int key) {
+        return key % numBuckets;
+    }
+
     public MyHashSet() {
-        storage = new boolean[1000001];
+        numBuckets = 15000;
+        buckets = new ArrayList<>();
+
+        for (int i = 0; i < numBuckets; i++) {
+            buckets.add(new LinkedList<>());
+        }
     }
-    
+
     public void add(int key) {
-        storage[key] = true;
+        int index = getHashValue(key);
+        LinkedList<Integer> list = buckets.get(index);
+
+        if (!list.contains(key)) {
+            list.add(key);
+        }
     }
-    
+
     public void remove(int key) {
-        storage[key] = false;
+        int index = getHashValue(key);
+        LinkedList<Integer> list = buckets.get(index);
+
+        list.remove(Integer.valueOf(key));
     }
-    
+
     public boolean contains(int key) {
-        return storage[key];
+        int index = getHashValue(key);
+        LinkedList<Integer> list = buckets.get(index);
+
+        return list.contains(key);
     }
 }
 
